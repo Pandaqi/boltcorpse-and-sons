@@ -1,0 +1,19 @@
+[gd_scene load_steps=5 format=3 uid="uid://dsuvq68miv6x8"]
+
+[ext_resource type="Script" path="res://ghosts/ghost.gd" id="1_dygqk"]
+[ext_resource type="Texture2D" uid="uid://dsoefc7aqga86" path="res://icon.svg" id="1_ffeg6"]
+[ext_resource type="Script" path="res://ghosts/modules/health.gd" id="3_11viq"]
+[ext_resource type="Script" path="res://ghosts/modules/mover.gd" id="4_nfhkg"]
+
+[node name="Ghost" type="Node2D" groups=["Ghosts"]]
+script = ExtResource("1_dygqk")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+modulate = Color(0.982, 0.306, 3, 0.8)
+texture = ExtResource("1_ffeg6")
+
+[node name="Health" type="Node2D" parent="."]
+script = ExtResource("3_11viq")
+
+[node name="Mover" type="Node2D" parent="."]
+script = ExtResource("4_nfhkg")

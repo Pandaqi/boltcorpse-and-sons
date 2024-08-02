@@ -1,0 +1,6 @@
+[gd_resource type="Resource" script_class="GhostData" load_steps=2 format=3 uid="uid://7ndijft3aqws"]
+
+[ext_resource type="Script" path="res://ghosts/ghost_data.gd" id="1_fxnyv"]
+
+[resource]
+script = ExtResource("1_fxnyv")

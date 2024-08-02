@@ -1,0 +1,258 @@
+[gd_scene load_steps=25 format=3 uid="uid://dwq6ly1p8qy12"]
+
+[ext_resource type="Texture2D" uid="uid://dsoefc7aqga86" path="res://icon.svg" id="1_1skar"]
+[ext_resource type="Script" path="res://game_loop/main/main.gd" id="1_psqdd"]
+[ext_resource type="Script" path="res://game_loop/main/camera.gd" id="2_k0pq2"]
+[ext_resource type="Script" path="res://game_loop/main/progression/progression.gd" id="2_refyh"]
+[ext_resource type="Script" path="res://map/map.gd" id="2_ykd0i"]
+[ext_resource type="PackedScene" uid="uid://dsuvq68miv6x8" path="res://ghosts/ghost.tscn" id="3_jyu2n"]
+[ext_resource type="Script" path="res://game_loop/main/progression/progression_data.gd" id="3_qqng1"]
+[ext_resource type="Script" path="res://map/spawner/spawner.gd" id="5_chqyf"]
+[ext_resource type="Resource" uid="uid://crb1nt4ffy00e" path="res://player/player_data.tres" id="6_6f3qk"]
+[ext_resource type="PackedScene" uid="uid://corstd1u70a0h" path="res://player/player.tscn" id="8_wvqor"]
+[ext_resource type="Resource" uid="uid://7ndijft3aqws" path="res://ghosts/ghost_data.tres" id="9_esefb"]
+[ext_resource type="Script" path="res://ui/lives/lives.gd" id="9_pjnn6"]
+[ext_resource type="Script" path="res://ui/ui.gd" id="9_rid4j"]
+[ext_resource type="PackedScene" uid="uid://cysh2j4w6u1of" path="res://ui/lives/life_sprite.tscn" id="10_awcma"]
+[ext_resource type="Script" path="res://ui/glasses/glasses.gd" id="12_jw1td"]
+[ext_resource type="Resource" uid="uid://d21b842whii5" path="res://player/glasses/glasses_data.tres" id="13_7mas8"]
+[ext_resource type="PackedScene" uid="uid://c8qgvdiwwqt1c" path="res://ui/glasses/glasses_sprite.tscn" id="13_hw63y"]
+[ext_resource type="FontFile" uid="uid://c8k2wnr8js0r2" path="res://ui/fonts/heading.ttf" id="16_hmwjp"]
+[ext_resource type="Script" path="res://game_loop/main/game_over.gd" id="16_xyl3x"]
+[ext_resource type="Theme" uid="uid://jnbucre5g4fs" path="res://ui/default_theme.tres" id="17_citkh"]
+
+[sub_resource type="Resource" id="Resource_3hy7l"]
+script = ExtResource("3_qqng1")
+
+[sub_resource type="Animation" id="Animation_qnt2k"]
+resource_name = "game_over_appear"
+length = 1.2
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("ColorRect:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.533333),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("CenterContainer/VBoxContainer/Heading:modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0.366667, 0.733333),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("CenterContainer/VBoxContainer/RichTextLabel:modulate")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0.6, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1)]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("CenterContainer/VBoxContainer/HBoxContainer:modulate")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0.766667, 1.2),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_u84je"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("ColorRect:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("CenterContainer/VBoxContainer/Heading:modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 0)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("CenterContainer/VBoxContainer/RichTextLabel:modulate")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 0)]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("CenterContainer/VBoxContainer/HBoxContainer:modulate")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 0)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_rjbok"]
+_data = {
+"RESET": SubResource("Animation_u84je"),
+"game_over_appear": SubResource("Animation_qnt2k")
+}
+
+[node name="Main" type="Node2D"]
+script = ExtResource("1_psqdd")
+
+[node name="Progression" type="Node" parent="."]
+script = ExtResource("2_refyh")
+prog_data = SubResource("Resource_3hy7l")
+
+[node name="Timer" type="Timer" parent="Progression"]
+autostart = true
+
+[node name="Camera2D" type="Camera2D" parent="."]
+script = ExtResource("2_k0pq2")
+player_data = ExtResource("6_6f3qk")
+
+[node name="Map" type="Node2D" parent="."]
+script = ExtResource("2_ykd0i")
+
+[node name="CanvasModulate" type="CanvasModulate" parent="Map"]
+color = Color(0.2484, 0.2484, 0.2484, 1)
+
+[node name="Sprite2D" type="Sprite2D" parent="Map"]
+modulate = Color(0.529067, 0.529067, 0.529067, 1)
+position = Vector2(-6.10352e-05, 0)
+scale = Vector2(20.875, 11.8844)
+texture = ExtResource("1_1skar")
+
+[node name="SpawnerGhosts" type="Node2D" parent="Map"]
+script = ExtResource("5_chqyf")
+ghost_scene = ExtResource("3_jyu2n")
+player_data = ExtResource("6_6f3qk")
+ghost_data = ExtResource("9_esefb")
+
+[node name="Timer" type="Timer" parent="Map/SpawnerGhosts"]
+
+[node name="Player" parent="." instance=ExtResource("8_wvqor")]
+
+[node name="UI" type="CanvasLayer" parent="."]
+script = ExtResource("9_rid4j")
+
+[node name="Lives" type="Node2D" parent="UI"]
+script = ExtResource("9_pjnn6")
+life_sprite = ExtResource("10_awcma")
+
+[node name="Glasses" type="Node2D" parent="UI"]
+script = ExtResource("12_jw1td")
+glasses_sprite = ExtResource("13_hw63y")
+glasses_data = ExtResource("13_7mas8")
+
+[node name="GameOver" type="Control" parent="UI"]
+process_mode = 3
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("16_xyl3x")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="UI/GameOver"]
+libraries = {
+"": SubResource("AnimationLibrary_rjbok")
+}
+
+[node name="ColorRect" type="ColorRect" parent="UI/GameOver"]
+modulate = Color(1, 1, 1, 0)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 1)
+
+[node name="CenterContainer" type="CenterContainer" parent="UI/GameOver"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="UI/GameOver/CenterContainer"]
+layout_mode = 2
+theme_override_constants/separation = 12
+
+[node name="Heading" type="Label" parent="UI/GameOver/CenterContainer/VBoxContainer"]
+modulate = Color(1, 1, 1, 0)
+layout_mode = 2
+theme_override_fonts/font = ExtResource("16_hmwjp")
+theme_override_font_sizes/font_size = 128
+text = "Game Over"
+
+[node name="RichTextLabel" type="RichTextLabel" parent="UI/GameOver/CenterContainer/VBoxContainer"]
+modulate = Color(1, 1, 1, 0)
+layout_mode = 2
+theme = ExtResource("17_citkh")
+bbcode_enabled = true
+text = "You managed to chase away [b]X ghosts[/b] and rack up [b]Y points[/b]. 
+
+Perhaps there is a future for you at [i]Boltcorpse & Sons[/i]. If you were still alive."
+fit_content = true
+
+[node name="HBoxContainer" type="HBoxContainer" parent="UI/GameOver/CenterContainer/VBoxContainer"]
+modulate = Color(1, 1, 1, 0)
+layout_mode = 2
+theme_override_constants/separation = 12
+
+[node name="Back" type="Button" parent="UI/GameOver/CenterContainer/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme = ExtResource("17_citkh")
+text = "Give Up"
+
+[node name="Continue" type="Button" parent="UI/GameOver/CenterContainer/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme = ExtResource("17_citkh")
+text = "Try Again"
+
+[connection signal="timeout" from="Progression/Timer" to="Progression" method="on_timer_timeout"]
+[connection signal="timeout" from="Map/SpawnerGhosts/Timer" to="Map/SpawnerGhosts" method="on_timer_timeout"]
+[connection signal="pressed" from="UI/GameOver/CenterContainer/VBoxContainer/HBoxContainer/Back" to="UI/GameOver" method="_on_back_pressed"]
+[connection signal="pressed" from="UI/GameOver/CenterContainer/VBoxContainer/HBoxContainer/Continue" to="UI/GameOver" method="_on_continue_pressed"]

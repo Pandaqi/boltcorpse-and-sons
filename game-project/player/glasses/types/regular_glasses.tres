@@ -1,0 +1,6 @@
+[gd_resource type="Resource" script_class="GlassesTypeData" load_steps=2 format=3 uid="uid://bcsj5jor77soy"]
+
+[ext_resource type="Script" path="res://player/glasses/types/glasses_type_data.gd" id="1_klybx"]
+
+[resource]
+script = ExtResource("1_klybx")

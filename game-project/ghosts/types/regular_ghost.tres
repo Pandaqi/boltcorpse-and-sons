@@ -1,0 +1,7 @@
+[gd_resource type="Resource" script_class="GhostTypeData" load_steps=2 format=3 uid="uid://dunsu8wxxemwt"]
+
+[ext_resource type="Script" path="res://ghosts/types/ghost_type_data.gd" id="1_2jcye"]
+
+[resource]
+script = ExtResource("1_2jcye")
+range = 64.0

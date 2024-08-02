@@ -1,0 +1,11 @@
+[gd_scene load_steps=3 format=3 uid="uid://c8qgvdiwwqt1c"]
+
+[ext_resource type="Script" path="res://ui/glasses/glasses_sprite.gd" id="1_dygqc"]
+[ext_resource type="Texture2D" uid="uid://dsoefc7aqga86" path="res://icon.svg" id="2_j0rfk"]
+
+[node name="GlassesSprite" type="Node2D"]
+script = ExtResource("1_dygqc")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+modulate = Color(0.33207, 0.736615, 0.559271, 1)
+texture = ExtResource("2_j0rfk")

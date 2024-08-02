@@ -1,0 +1,57 @@
+[gd_scene load_steps=13 format=3 uid="uid://corstd1u70a0h"]
+
+[ext_resource type="Script" path="res://player/player.gd" id="1_8nwlk"]
+[ext_resource type="Resource" uid="uid://crb1nt4ffy00e" path="res://player/player_data.tres" id="2_13tto"]
+[ext_resource type="Script" path="res://player/modules/visuals.gd" id="3_g1233"]
+[ext_resource type="Texture2D" uid="uid://dsoefc7aqga86" path="res://icon.svg" id="4_n2k5e"]
+[ext_resource type="Script" path="res://player/modules/looker.gd" id="5_0qvwt"]
+[ext_resource type="Script" path="res://player/modules/lives.gd" id="6_3q0xq"]
+[ext_resource type="Resource" uid="uid://7ndijft3aqws" path="res://ghosts/ghost_data.tres" id="6_nqwpf"]
+[ext_resource type="Script" path="res://player/modules/glasses_picker.gd" id="7_gcyjg"]
+[ext_resource type="Resource" uid="uid://d21b842whii5" path="res://player/glasses/glasses_data.tres" id="8_y2lou"]
+[ext_resource type="Script" path="res://player/modules/ghost_feeler.gd" id="9_q1f4h"]
+[ext_resource type="Script" path="res://player/modules/ghost_killer.gd" id="11_ysm6p"]
+[ext_resource type="Script" path="res://player/modules/stats_tracker.gd" id="12_kui0k"]
+
+[node name="Player" type="Node2D"]
+script = ExtResource("1_8nwlk")
+player_data = ExtResource("2_13tto")
+
+[node name="Visuals" type="Node2D" parent="."]
+script = ExtResource("3_g1233")
+
+[node name="Sprite2D" type="Sprite2D" parent="Visuals"]
+texture = ExtResource("4_n2k5e")
+
+[node name="Looker" type="Node2D" parent="."]
+script = ExtResource("5_0qvwt")
+player_data = ExtResource("2_13tto")
+ghost_data = ExtResource("6_nqwpf")
+
+[node name="Flashlight" type="Node2D" parent="Looker"]
+
+[node name="PointLight2D" type="PointLight2D" parent="Looker/Flashlight"]
+position = Vector2(200, -10)
+scale = Vector2(3.10156, 3.10156)
+color = Color(1, 0.467215, 0.689547, 1)
+energy = 4.0
+texture = ExtResource("4_n2k5e")
+
+[node name="Lives" type="Node" parent="."]
+script = ExtResource("6_3q0xq")
+
+[node name="GlassesPicker" type="Node" parent="."]
+script = ExtResource("7_gcyjg")
+glasses_data = ExtResource("8_y2lou")
+
+[node name="GhostFeeler" type="Node" parent="."]
+script = ExtResource("9_q1f4h")
+ghost_data = ExtResource("6_nqwpf")
+
+[node name="GhostKiller" type="Node" parent="."]
+script = ExtResource("11_ysm6p")
+ghost_data = ExtResource("6_nqwpf")
+glasses_data = ExtResource("8_y2lou")
+
+[node name="StatsTracker" type="Node" parent="."]
+script = ExtResource("12_kui0k")
