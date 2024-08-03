@@ -38,74 +38,158 @@ You only see one side of the game at a time. Ghosts spawn on either side.
 * If empty, the ghost evaporates.
 * If it hits you before that moment, you lose a life + the ghost might have a special curse for you.
 
-## QUESTIONS
-
-* How do you get new goggles?
-  * Probably just by _seeing them_ for long enough, to neatly re-use the same mechanics everywhere.
-  * **Or, new Glasses simply appear automatically when a new ghost arrives that needs them** => you start with two glasses, the rest comes automatically
-* How do you know what does what?
-  * New ghosts are introduced spaced out. When that happens, the game temporarily pauses and displays its tutorial.
-  * You can pause the game yourself and look back at all ghosts unlocked? Or their tutorial stays on the screen (at the top, minified)?
-
-
-## Possible Ghosts
-
-
-
-
 
 ## CRUCIAL TODO
 
-Bring back the Config in some form => probably the resource again, does feel most useful
+In this order:
+* Lay groundwork for CONTROLLING GHOST SPAWNING
+* Add some debug config for skipping tutorial + forcibly insta-spawning ghost types.
+* Create the ghosts.
+  * Resources for all types + code for movement
+  * Add all to list to be chosen
+  * Draw their graphics
+* Draw the glasses graphics.
+* Any finetuning/polishing
 
-VISUAL STYLE:
-* Very cartoony, flat, simple
-* But with this "grunge, starry sky" texture thrown over everything (see reference image)
-
-Graphics
-* Player
-* Glasses
-* Life
-* Ghost types
-* Some tiled background or map or something
-* _Proper light sprite that shows at least most of the map_
-
-Glasses:
-* Figure out the different things they can do.
-* AT ITS CORE, the glasses are a simple pairing => "This ghost is weak against glasses X and Y, so you need one of those"
-* Some are simply more powerful, make ghosts slower, etcetera
-* (Also modulate the lighting color/shape based on the glasses! Especially SHAPE should be awesome => the "square" glasses have a square shape, then a triangle, then a circle, then one with holes, etcetera.)
+Glasses: Draw the remaining graphics
+* Goggles are shaped like their regular shape
+* Move around the details a bit (flames, texture, etcetera)
 
 Ghosts
-* Actual health bars and being able to remove them
-* Display their "weak against"-glasses clearly on their body
+* Scale NUMBER of ghosts that spawn at most ( + time between them) on Progression
 * Create the different types + their tutorials
-* Figure out the best way to create entirely different movement => just create _scripts_ that extend from GhostMovementData, which can do anything they please for movement
-  * Only move if (not) watching
+* Some completely different movement patterns
+  * Only move if (not) watching ("El Weepo Angelo")
   * Move in _jumps_
   * Speed up/Slow down over time
   * Only move if weak glasses watching
-  * Go forward-backward-forward-backward
-* Scale their numbers based on Progression => When a certain threshold is reached, unlock the next ghost
+  * Go forward-backward-forward-backward ("The Dancing Ghost")
 
-UI:
-* Nice tweens when lives are added/removed
-* Clear button hints + what's currently focused on/highlighted in glasses
-* At game start, display the keys needed in space to left and right of player
-* The number keys for glasses are also displayed + you can _click_ them to switch?
 
-SoundFX:
-* Creepy soundtrack
-* Losing a life
-* Getting hit
-* Switching side (like a flashlight switching on/off?)
-* Changing glasses
-* (Movement of ghosts?)
+Juice/Polishing:
+* Satisfying particles when ghost dies (long swirls traveling upward with the ghost?)
+* (Some particles when you get hit?)
+* Creepy soundtrack/ambience
 
 
 ## OPTIONAL TODO
 
+Player Progression:
+* Now the ghosts escalate, but you don't necessarily do. So maybe there are powerups or something that will make _all_ goggles faster at damage, or _all_ ghosts slower, or something. (Maybe this is a choice: whenever a new ghost is introduced, you can also choose "Ghosts are 10% slower" OR "Every goggle does +5 damage")
+* Those special effects/curses of ghosts?
+
 Game Loop:
-* (Create main menu? Pause menu?)
+* Create main menu? (If we do that, we should have our marketing image finished, otherwise it looks silly.)
+
+Juice:
+* Also show the Glasses equipped _on the player_? (Give the player some idle animation or something?)
+* Game start/end sound (though the sparseness actually works with this theme?)
+* Actually animate the ghosts
+
 
 Devlog => mention that I wanted to continue my challenge of using custom resources in Godot, now by making them _behavior defining_ such as giving ghosts completely different movement by just slotting them in
+
+@IDEA: Get powerups/new glasses/something more _proactively_?
+* Probably just by _seeing them_ for long enough, to neatly re-use the same mechanics everywhere. => **This is actually really promising, but I don't have time to put it into the game now.**
+* (Or have one-time goggles that, when selected, will instantly trigger whatever they do and then disappear from your inventory.)
+
+@IDEA: For difficulty control.
+* When determining ghost and glasses order, don't be completely random. Leave those with a higher value ( = harder) for _later_?
+
+
+## Ghosts
+
+### Regular
+
+* Movement: Floaty
+* Health/Attack/Shield/Speed: Regular
+
+### Speedy
+
+* Movement: Floaty
+* Speed++
+* Health--
+
+### Turtle
+
+* Movement: Floaty
+* Speed--
+* Health++
+* Shield+
+* SelfLight: false
+
+### Jumper
+
+* Movement: Jump (sits still, suddenly jumps a gap, sits still again)
+
+### Dancer
+
+* Movement: back-and-forth
+* Speed+
+* Shield+
+
+### Weeping Angel
+
+* Movement: Only moves when you're not looking. (Regardless of glasses you're wearing.)
+* Speed+
+* Health-
+* SelfLight: false
+
+### Monster
+
+* Movement: Floaty
+* Speed-
+* Shield+
+* Special: Takes away 2 lives on impact
+
+### Racer
+
+* Movement: Changes over time (speed-up)
+
+### Sleepwalker
+
+* Movement: Changes over time (slow-down)
+* SelfLight: false
+
+### Einzelganger
+
+* Movement: only moves if no other ghosts are close
+* Speed++
+
+
+
+## Glasses
+
+### Circle
+
+Starter, everything default/middle road
+
+### Triangle
+
+* Damage++
+* Sight Range--
+
+### Square
+
+* Damage--
+* Kill Range++
+
+### Wavy
+
+* Speeds up (all) ghosts
+* Damage+
+* Kill Range+
+* Sight Range+
+
+### Holes
+
+* Ignores Ghost Shields
+* Damage-
+* Kill Range-
+* Sight Range+
+
+### Inverted
+
+* Slows down (all) ghosts
+* Ghosts only take 1 life at most
+* Kill Range--

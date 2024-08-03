@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="Config" load_steps=2 format=3 uid="uid://u6olkls3fh7k"]
+
+[ext_resource type="Script" path="res://game_loop/globals/config.gd" id="1_wu4df"]
+
+[resource]
+script = ExtResource("1_wu4df")
+glasses_def_range_kill = 1792.0
+glasses_def_range_see = 2432.0
+glasses_def_damage = 30.0
+ghosts_def_health = 100.0
+ghosts_def_range = 64.0

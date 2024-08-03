@@ -1,0 +1,49 @@
+[gd_scene load_steps=7 format=3 uid="uid://bfnj7yvk0hwyk"]
+
+[ext_resource type="Script" path="res://ui/tutorial/tutorial_ghost.gd" id="1_fwbma"]
+[ext_resource type="Texture2D" uid="uid://bsrfwjrosg3pr" path="res://ui/tutorial/tutorial_ghost.webp" id="1_ptn5i"]
+[ext_resource type="Theme" uid="uid://jnbucre5g4fs" path="res://ui/default_theme.tres" id="2_o0f6o"]
+[ext_resource type="FontFile" uid="uid://c4b8314vpi2qp" path="res://ui/fonts/body_italic.ttf" id="3_yjpb1"]
+[ext_resource type="Texture2D" uid="uid://cip2bhrxytn74" path="res://ghosts/ghosts.webp" id="4_c7gp8"]
+[ext_resource type="PackedScene" uid="uid://dx4k7w6fsst5v" path="res://ui/tutorial/tutorial_stats_sprite.tscn" id="5_wbf51"]
+
+[node name="TutorialGhost" type="Node2D"]
+script = ExtResource("1_fwbma")
+
+[node name="BG" type="Sprite2D" parent="."]
+texture = ExtResource("1_ptn5i")
+
+[node name="Label" type="Label" parent="."]
+offset_left = -135.0
+offset_top = -188.0
+offset_right = 454.0
+offset_bottom = 97.0
+theme = ExtResource("2_o0f6o")
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("3_yjpb1")
+theme_override_font_sizes/font_size = 36
+text = "Defensive goggles. All ghosts move slower and you only lose 1 life at most if hit."
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 3
+
+[node name="Ghost" type="Sprite2D" parent="."]
+position = Vector2(-301, -48)
+scale = Vector2(0.55, 0.55)
+texture = ExtResource("4_c7gp8")
+hframes = 4
+vframes = 4
+
+[node name="Stats" type="Node2D" parent="."]
+
+[node name="Health" parent="Stats" instance=ExtResource("5_wbf51")]
+position = Vector2(-302, 186)
+
+[node name="Shield" parent="Stats" instance=ExtResource("5_wbf51")]
+position = Vector2(-46, 186)
+
+[node name="Speed" parent="Stats" instance=ExtResource("5_wbf51")]
+position = Vector2(205, 186)
+
+[node name="Damage" parent="Stats" instance=ExtResource("5_wbf51")]
+position = Vector2(427, 186)

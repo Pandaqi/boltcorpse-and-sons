@@ -10,7 +10,7 @@ func activate(p:Player) -> void:
 
 func on_resize() -> void:
 	var vp = get_viewport_rect().size
-	set_position(Vector2(0.5*vp.x, sprite_size*1.25))
+	set_position(Vector2(0.5*vp.x, sprite_size))
 
 func update_lives(new_lives:int) -> void:
 	while sprites.size() < new_lives:
@@ -23,5 +23,10 @@ func update_lives(new_lives:int) -> void:
 	for i in range(sprites.size()):
 		var should_show = i < new_lives
 		var sprite = sprites[i]
-		sprite.set_visible(should_show)
 		sprite.set_position(global_offset + i * offset_per_sprite)
+		
+		var change_needed = (should_show != sprite.is_active)
+		if not change_needed: continue
+		
+		sprite.change_visible(should_show)
+		

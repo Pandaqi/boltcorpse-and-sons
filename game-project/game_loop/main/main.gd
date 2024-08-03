@@ -6,9 +6,9 @@ extends Node2D
 @onready var progression : Progression = $Progression
 
 func _ready() -> void:
-	progression.activate(player, ui.game_over)
 	ui.activate(player) # as usual, UI is connected BEFORE initializing anything else, so UI automatically initializes with it later
+	progression.activate(player, ui.game_over, ui.tutorial)
 	map.activate()
 	player.activate()
 	
-	
+	progression.start_game()

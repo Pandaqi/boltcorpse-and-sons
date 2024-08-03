@@ -1,17 +1,174 @@
-[gd_scene load_steps=13 format=3 uid="uid://corstd1u70a0h"]
+[gd_scene load_steps=32 format=3 uid="uid://corstd1u70a0h"]
 
 [ext_resource type="Script" path="res://player/player.gd" id="1_8nwlk"]
 [ext_resource type="Resource" uid="uid://crb1nt4ffy00e" path="res://player/player_data.tres" id="2_13tto"]
 [ext_resource type="Script" path="res://player/modules/visuals.gd" id="3_g1233"]
-[ext_resource type="Texture2D" uid="uid://dsoefc7aqga86" path="res://icon.svg" id="4_n2k5e"]
+[ext_resource type="Texture2D" uid="uid://bs3wojv1b77ln" path="res://game_loop/misc.webp" id="4_1647w"]
 [ext_resource type="Script" path="res://player/modules/looker.gd" id="5_0qvwt"]
 [ext_resource type="Script" path="res://player/modules/lives.gd" id="6_3q0xq"]
 [ext_resource type="Resource" uid="uid://7ndijft3aqws" path="res://ghosts/ghost_data.tres" id="6_nqwpf"]
 [ext_resource type="Script" path="res://player/modules/glasses_picker.gd" id="7_gcyjg"]
+[ext_resource type="Texture2D" uid="uid://b51wui2nask5p" path="res://player/light_sprites/light_sprite_cone.webp" id="7_oix81"]
+[ext_resource type="Resource" uid="uid://u6olkls3fh7k" path="res://game_loop/globals/config.tres" id="8_cv405"]
 [ext_resource type="Resource" uid="uid://d21b842whii5" path="res://player/glasses/glasses_data.tres" id="8_y2lou"]
 [ext_resource type="Script" path="res://player/modules/ghost_feeler.gd" id="9_q1f4h"]
+[ext_resource type="AudioStream" uid="uid://dw0fx81i13r68" path="res://player/flashlight_switch.ogg" id="10_yde70"]
+[ext_resource type="Material" uid="uid://cfg3snrvh2kwy" path="res://player/dotted_circle_shader.tres" id="11_dbyts"]
 [ext_resource type="Script" path="res://player/modules/ghost_killer.gd" id="11_ysm6p"]
+[ext_resource type="AudioStream" uid="uid://crej2v60tsodj" path="res://player/life_lost.ogg" id="12_01wuc"]
+[ext_resource type="Texture2D" uid="uid://dsoefc7aqga86" path="res://icon.svg" id="12_4nb3q"]
 [ext_resource type="Script" path="res://player/modules/stats_tracker.gd" id="12_kui0k"]
+[ext_resource type="AudioStream" uid="uid://boitngocshf0b" path="res://player/glasses/glasses_switch.ogg" id="13_fmncr"]
+[ext_resource type="Resource" uid="uid://mfgajlgamn7b" path="res://game_loop/main/progression/progression_data.tres" id="18_iiviq"]
+
+[sub_resource type="Animation" id="Animation_7x1ng"]
+resource_name = "flash"
+length = 0.3
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.166667, 0.3),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 1), Color(2, 1.5, 1.5, 1), Color(1, 1, 1, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_0xrtc"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_ix64g"]
+_data = {
+"RESET": SubResource("Animation_0xrtc"),
+"flash": SubResource("Animation_7x1ng")
+}
+
+[sub_resource type="Animation" id="Animation_od2n0"]
+resource_name = "random_fade"
+length = 3.0
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:material:shader_parameter/color")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1.5, 3),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Color(0.45, 0.459, 0.947, 1), Color(0.45, 0.459, 0.947, 0.156), Color(0.45, 0.459, 0.947, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_jlo5n"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:material:shader_parameter/color")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(0.45, 0.459, 0.947, 1)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_ugocu"]
+_data = {
+"RESET": SubResource("Animation_jlo5n"),
+"random_fade": SubResource("Animation_od2n0")
+}
+
+[sub_resource type="Shader" id="Shader_1c1lb"]
+code = "shader_type canvas_item;
+render_mode blend_add;
+uniform vec4 color : source_color = vec4(1.0);
+uniform float diameter = 1.0; // Circle Diameter
+uniform float thickness = 0.05; // Outline thickness
+uniform float frequency = 10.0; // Controls the number of dots
+uniform float phase = 0.0; // Controls the rotation of the circle
+
+void fragment() {
+  vec2 pos = UV - vec2(0.5);
+  float outer_radius = diameter / 2.0;
+  float inner_radius = outer_radius - thickness;
+  float outer_circle = step(length(pos), outer_radius);
+  float inner_circle = step(length(pos), inner_radius);
+  
+  float angle = atan(pos.y, pos.x);
+  if (angle < 0.0) {
+    angle += 2.0 * PI;
+  }
+  float wave = 0.5 * sin(frequency * angle + phase) + 0.5;
+  
+  float ring = outer_circle - inner_circle;
+  ring *= step(0.5, wave);
+  
+  COLOR = vec4(color.rgb, ring * color.a);
+}"
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_js5k6"]
+shader = SubResource("Shader_1c1lb")
+shader_parameter/color = Color(0.852708, 4.89971e-05, 0.32014, 1)
+shader_parameter/diameter = 1.0
+shader_parameter/thickness = 0.03
+shader_parameter/frequency = 66.0
+shader_parameter/phase = 0.0
+
+[sub_resource type="Animation" id="Animation_6qcen"]
+resource_name = "random_fade"
+length = 2.0
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("KillRadius:material:shader_parameter/color")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1, 2),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Color(0.852708, 4.89971e-05, 0.32014, 1), Color(0.853, 0, 0.32, 0.2), Color(0.852708, 4.89971e-05, 0.32014, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_ubbb7"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("KillRadius:material:shader_parameter/color")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(0.852708, 4.89971e-05, 0.32014, 1)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_snqlm"]
+_data = {
+"RESET": SubResource("Animation_ubbb7"),
+"random_fade": SubResource("Animation_6qcen")
+}
 
 [node name="Player" type="Node2D"]
 script = ExtResource("1_8nwlk")
@@ -21,37 +178,82 @@ player_data = ExtResource("2_13tto")
 script = ExtResource("3_g1233")
 
 [node name="Sprite2D" type="Sprite2D" parent="Visuals"]
-texture = ExtResource("4_n2k5e")
+texture = ExtResource("4_1647w")
+hframes = 4
+vframes = 4
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Visuals"]
+libraries = {
+"": SubResource("AnimationLibrary_ix64g")
+}
 
 [node name="Looker" type="Node2D" parent="."]
 script = ExtResource("5_0qvwt")
 player_data = ExtResource("2_13tto")
 ghost_data = ExtResource("6_nqwpf")
+glasses_data = ExtResource("8_y2lou")
+config = ExtResource("8_cv405")
 
 [node name="Flashlight" type="Node2D" parent="Looker"]
 
 [node name="PointLight2D" type="PointLight2D" parent="Looker/Flashlight"]
-position = Vector2(200, -10)
-scale = Vector2(3.10156, 3.10156)
-color = Color(1, 0.467215, 0.689547, 1)
-energy = 4.0
-texture = ExtResource("4_n2k5e")
+position = Vector2(1536, 4)
+texture = ExtResource("7_oix81")
+texture_scale = 3.0
 
-[node name="Lives" type="Node" parent="."]
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="Looker"]
+stream = ExtResource("10_yde70")
+
+[node name="SightRadiusContainer" type="Node2D" parent="Looker"]
+
+[node name="SightRadius" type="Sprite2D" parent="Looker/SightRadiusContainer"]
+material = ExtResource("11_dbyts")
+texture = ExtResource("12_4nb3q")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Looker/SightRadiusContainer"]
+root_node = NodePath("../SightRadius")
+libraries = {
+"": SubResource("AnimationLibrary_ugocu")
+}
+
+[node name="Lives" type="Node2D" parent="."]
 script = ExtResource("6_3q0xq")
+config = ExtResource("8_cv405")
 
-[node name="GlassesPicker" type="Node" parent="."]
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="Lives"]
+stream = ExtResource("12_01wuc")
+
+[node name="GlassesPicker" type="Node2D" parent="."]
 script = ExtResource("7_gcyjg")
 glasses_data = ExtResource("8_y2lou")
+
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="GlassesPicker"]
+stream = ExtResource("13_fmncr")
 
 [node name="GhostFeeler" type="Node" parent="."]
 script = ExtResource("9_q1f4h")
 ghost_data = ExtResource("6_nqwpf")
+glasses_data = ExtResource("8_y2lou")
+config = ExtResource("8_cv405")
 
-[node name="GhostKiller" type="Node" parent="."]
+[node name="GhostKiller" type="Node2D" parent="."]
 script = ExtResource("11_ysm6p")
 ghost_data = ExtResource("6_nqwpf")
 glasses_data = ExtResource("8_y2lou")
+config = ExtResource("8_cv405")
+
+[node name="KillRadiusContainer" type="Node2D" parent="GhostKiller"]
+
+[node name="KillRadius" type="Sprite2D" parent="GhostKiller/KillRadiusContainer"]
+material = SubResource("ShaderMaterial_js5k6")
+texture = ExtResource("12_4nb3q")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="GhostKiller/KillRadiusContainer"]
+libraries = {
+"": SubResource("AnimationLibrary_snqlm")
+}
 
 [node name="StatsTracker" type="Node" parent="."]
 script = ExtResource("12_kui0k")
+prog_data = ExtResource("18_iiviq")
+config = ExtResource("8_cv405")

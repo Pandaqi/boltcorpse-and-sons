@@ -1,0 +1,17 @@
+[gd_resource type="Resource" script_class="GlassesTypeData" load_steps=3 format=3 uid="uid://bcsj5jor77soy"]
+
+[ext_resource type="Texture2D" uid="uid://cjklx8jhc7dd" path="res://player/light_sprites/light_sprite_circle.webp" id="1_f5xmx"]
+[ext_resource type="Script" path="res://player/glasses/types/glasses_type_data.gd" id="2_t4top"]
+
+[resource]
+script = ExtResource("2_t4top")
+frame = 0
+damage = 1.0
+light_color = Color(0.382109, 0.917959, 0.91104, 1)
+light_shape = ExtResource("1_f5xmx")
+range_kill = 1.0
+range_see = 1.0
+desc = "Starter glasses with nothing special."
+pierce_shield = false
+ghost_speed_scale = 1.0
+lives_taken_override = -1

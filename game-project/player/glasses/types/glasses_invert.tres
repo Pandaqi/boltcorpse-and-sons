@@ -1,0 +1,17 @@
+[gd_resource type="Resource" script_class="GlassesTypeData" load_steps=3 format=3 uid="uid://dss2ed0sq2jvf"]
+
+[ext_resource type="Texture2D" uid="uid://dkk2ys1ff174o" path="res://player/light_sprites/light_sprite_invert.webp" id="1_6wv7t"]
+[ext_resource type="Script" path="res://player/glasses/types/glasses_type_data.gd" id="2_h4uei"]
+
+[resource]
+script = ExtResource("2_h4uei")
+frame = 5
+damage = 1.0
+light_color = Color(0.804565, 0.707916, 1, 1)
+light_shape = ExtResource("1_6wv7t")
+range_kill = 0.5
+range_see = 1.0
+desc = "Defensive goggles. All ghosts move slower and you only lose 1 life at most if hit."
+pierce_shield = false
+ghost_speed_scale = 0.66
+lives_taken_override = 1

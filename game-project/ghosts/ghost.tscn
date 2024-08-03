@@ -1,19 +1,213 @@
-[gd_scene load_steps=5 format=3 uid="uid://dsuvq68miv6x8"]
+[gd_scene load_steps=22 format=3 uid="uid://dsuvq68miv6x8"]
 
 [ext_resource type="Script" path="res://ghosts/ghost.gd" id="1_dygqk"]
-[ext_resource type="Texture2D" uid="uid://dsoefc7aqga86" path="res://icon.svg" id="1_ffeg6"]
+[ext_resource type="Resource" uid="uid://u6olkls3fh7k" path="res://game_loop/globals/config.tres" id="2_3m5yl"]
+[ext_resource type="Texture2D" uid="uid://cip2bhrxytn74" path="res://ghosts/ghosts.webp" id="2_u4en6"]
 [ext_resource type="Script" path="res://ghosts/modules/health.gd" id="3_11viq"]
+[ext_resource type="Texture2D" uid="uid://cu0wndjfbptb5" path="res://game_loop/fuzzy_circle.webp" id="3_pprau"]
+[ext_resource type="Texture2D" uid="uid://3r4qex0exhe8" path="res://ui/nine_patch_rect.tres" id="4_0vx14"]
 [ext_resource type="Script" path="res://ghosts/modules/mover.gd" id="4_nfhkg"]
+[ext_resource type="AudioStream" uid="uid://cq3lbaae720kr" path="res://ghosts/ghost_death.ogg" id="5_6ikyj"]
+[ext_resource type="Script" path="res://ghosts/modules/weaknesses.gd" id="6_4v7b8"]
+[ext_resource type="PackedScene" uid="uid://c8qgvdiwwqt1c" path="res://ui/glasses/glasses_sprite.tscn" id="7_81c1e"]
+[ext_resource type="Script" path="res://ghosts/modules/light.gd" id="8_v11ns"]
+[ext_resource type="Resource" uid="uid://d21b842whii5" path="res://player/glasses/glasses_data.tres" id="9_7psmr"]
+[ext_resource type="Animation" uid="uid://c41o0ky1kx0ds" path="res://player/light_sprites/anim_flicker.res" id="11_pwsju"]
+[ext_resource type="AudioStream" uid="uid://c5lyxmhiuxpt4" path="res://ghosts/ghost_appear.ogg" id="13_at803"]
+[ext_resource type="Script" path="res://ghosts/modules/ghost_effects.gd" id="13_ktb6w"]
+[ext_resource type="AudioStream" uid="uid://c3kyxpurnposq" path="res://ghosts/ghost_whisper.ogg" id="15_rp6lp"]
+
+[sub_resource type="Animation" id="Animation_otx2o"]
+resource_name = "die"
+length = 3.0
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.0333333, 0.133333, 0.2, 2.93333, 3),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
+"update": 0,
+"values": [Vector2(1, 1), Vector2(0.9, 0.9), Vector2(1.4, 1.4), Vector2(0.5, 0.5), Vector2(0.5, 0.5), Vector2(1e-05, 1e-05)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.0333333, 0.0666667, 0.2, 3),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 1), Color(1, 0.568627, 1, 0.835294), Color(1, 1, 1, 0.666667), Color(1, 1, 1, 0.4), Color(1, 1, 1, 0)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Sprite2D:position")
+tracks/2/interp = 2
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0.2, 0.666667, 1.1, 1.53333, 1.96667, 2.4, 3),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1),
+"update": 0,
+"values": [Vector2(0, 0), Vector2(-50, -250), Vector2(50, -500), Vector2(-50, -750), Vector2(50, -1000), Vector2(-25, -1250), Vector2(0, -1500)]
+}
+
+[sub_resource type="Animation" id="Animation_ufrcd"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(1, 1)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Sprite2D:position")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, 0)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_8uxqg"]
+_data = {
+"RESET": SubResource("Animation_ufrcd"),
+"die": SubResource("Animation_otx2o")
+}
+
+[sub_resource type="Animation" id="Animation_su183"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("PointLight2D:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(1, 1)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("PointLight2D:modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_4grce"]
+_data = {
+"RESET": SubResource("Animation_su183"),
+"flicker": ExtResource("11_pwsju")
+}
 
 [node name="Ghost" type="Node2D" groups=["Ghosts"]]
 script = ExtResource("1_dygqk")
+config = ExtResource("2_3m5yl")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
-modulate = Color(0.982, 0.306, 3, 0.8)
-texture = ExtResource("1_ffeg6")
+texture = ExtResource("2_u4en6")
+hframes = 4
+vframes = 4
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_8uxqg")
+}
+
+[node name="AudioAppear" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("13_at803")
+volume_db = -12.0
+max_distance = 5000.0
+
+[node name="AudioDeath" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("5_6ikyj")
+volume_db = -4.0
+max_distance = 5000.0
 
 [node name="Health" type="Node2D" parent="."]
 script = ExtResource("3_11viq")
 
+[node name="TextureProgressBar" type="TextureProgressBar" parent="Health"]
+offset_left = -166.0
+offset_top = -384.0
+offset_right = 172.0
+offset_bottom = -267.0
+value = 50.0
+nine_patch_stretch = true
+stretch_margin_left = 50
+stretch_margin_top = 50
+stretch_margin_right = 50
+stretch_margin_bottom = 50
+texture_under = ExtResource("4_0vx14")
+texture_progress = ExtResource("4_0vx14")
+tint_progress = Color(0.858824, 0.270588, 0.2, 1)
+
 [node name="Mover" type="Node2D" parent="."]
 script = ExtResource("4_nfhkg")
+
+[node name="Weaknesses" type="Node2D" parent="."]
+position = Vector2(0, -424)
+script = ExtResource("6_4v7b8")
+glasses_sprite = ExtResource("7_81c1e")
+glasses_data = ExtResource("9_7psmr")
+
+[node name="Light" type="Node2D" parent="."]
+script = ExtResource("8_v11ns")
+
+[node name="PointLight2D" type="PointLight2D" parent="Light"]
+energy = 0.2
+texture = ExtResource("3_pprau")
+texture_scale = 1.5
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Light"]
+libraries = {
+"": SubResource("AnimationLibrary_4grce")
+}
+
+[node name="GhostEffects" type="Node2D" parent="."]
+script = ExtResource("13_ktb6w")
+
+[node name="Timer" type="Timer" parent="GhostEffects"]
+one_shot = true
+
+[node name="AudioWhispers" type="AudioStreamPlayer2D" parent="GhostEffects"]
+stream = ExtResource("15_rp6lp")
+volume_db = -18.0
+max_distance = 4000.0
+
+[connection signal="timeout" from="GhostEffects/Timer" to="GhostEffects" method="_on_timer_timeout"]

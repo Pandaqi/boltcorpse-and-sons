@@ -1,0 +1,17 @@
+[gd_resource type="Resource" script_class="GlassesTypeData" load_steps=3 format=3 uid="uid://dnbl5jf6kg8f6"]
+
+[ext_resource type="Texture2D" uid="uid://b51wui2nask5p" path="res://player/light_sprites/light_sprite_cone.webp" id="1_cbf7h"]
+[ext_resource type="Script" path="res://player/glasses/types/glasses_type_data.gd" id="2_p683i"]
+
+[resource]
+script = ExtResource("2_p683i")
+frame = 2
+damage = 2.5
+light_color = Color(1, 0.871667, 0.23, 1)
+light_shape = ExtResource("1_cbf7h")
+range_kill = 1.15
+range_see = 0.45
+desc = "Heavy damage, but ghosts appear later."
+pierce_shield = false
+ghost_speed_scale = 1.0
+lives_taken_override = -1

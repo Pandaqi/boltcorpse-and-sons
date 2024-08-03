@@ -1,0 +1,60 @@
+[gd_scene load_steps=8 format=3 uid="uid://cwp1ogr5nvk82"]
+
+[ext_resource type="Texture2D" uid="uid://cu4e57bsea7kc" path="res://ui/tutorial/tutorial_glasses.webp" id="1_6kj7g"]
+[ext_resource type="Script" path="res://ui/tutorial/tutorial_glasses.gd" id="1_q7mo1"]
+[ext_resource type="Theme" uid="uid://jnbucre5g4fs" path="res://ui/default_theme.tres" id="2_0ngd0"]
+[ext_resource type="FontFile" uid="uid://c4b8314vpi2qp" path="res://ui/fonts/body_italic.ttf" id="3_ipw4h"]
+[ext_resource type="Texture2D" uid="uid://bs3wojv1b77ln" path="res://game_loop/misc.webp" id="4_i2bgs"]
+[ext_resource type="Texture2D" uid="uid://yayldpjrrsln" path="res://player/glasses/glasses.webp" id="5_csuts"]
+[ext_resource type="PackedScene" uid="uid://dx4k7w6fsst5v" path="res://ui/tutorial/tutorial_stats_sprite.tscn" id="6_ws3av"]
+
+[node name="TutorialGlasses" type="Node2D"]
+script = ExtResource("1_q7mo1")
+
+[node name="BG" type="Sprite2D" parent="."]
+texture = ExtResource("1_6kj7g")
+
+[node name="Label" type="Label" parent="."]
+offset_left = -135.0
+offset_top = -188.0
+offset_right = 454.0
+offset_bottom = 97.0
+theme = ExtResource("2_0ngd0")
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("3_ipw4h")
+theme_override_font_sizes/font_size = 36
+text = "Defensive goggles. All ghosts move slower and you only lose 1 life at most if hit."
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 3
+
+[node name="GlassesSprite" type="Node2D" parent="."]
+position = Vector2(-301, -44)
+scale = Vector2(3.5, 3.5)
+
+[node name="BG" type="Sprite2D" parent="GlassesSprite"]
+scale = Vector2(0.166, 0.166)
+texture = ExtResource("4_i2bgs")
+hframes = 4
+vframes = 4
+frame = 2
+
+[node name="Sprite2D" type="Sprite2D" parent="GlassesSprite"]
+scale = Vector2(0.125, 0.125)
+texture = ExtResource("5_csuts")
+hframes = 4
+vframes = 2
+
+[node name="Stats" type="Node2D" parent="."]
+
+[node name="Damage" parent="Stats" instance=ExtResource("6_ws3av")]
+position = Vector2(-348, 186)
+
+[node name="RangeSee" parent="Stats" instance=ExtResource("6_ws3av")]
+position = Vector2(-66, 186)
+
+[node name="RangeKill" parent="Stats" instance=ExtResource("6_ws3av")]
+position = Vector2(193, 186)
+
+[node name="GhostSpeed" parent="Stats" instance=ExtResource("6_ws3av")]
+position = Vector2(431, 186)

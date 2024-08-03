@@ -1,15 +1,40 @@
 class_name ModuleLooker extends Node2D
 
-var dir := 1
+var dir := 0
 @onready var entity : Player = get_parent()
 @onready var flash_light = $Flashlight
+@onready var light : PointLight2D = $Flashlight/PointLight2D
+@onready var audio_player : AudioStreamPlayer2D = $AudioStreamPlayer2D
+@onready var sight_radius : Sprite2D = $SightRadiusContainer/SightRadius
+@onready var sight_radius_anim : AnimationPlayer = $SightRadiusContainer/AnimationPlayer
 @export var player_data : PlayerData
 @export var ghost_data : GhostData
+@export var glasses_data : GlassesData
+@export var config : Config
 
 signal dir_changed(new_dir:int)
 
 func activate() -> void:
 	look_to_side(1)
+	animate()
+	glasses_data.glasses_changed.connect(on_glasses_changed)
+	on_glasses_changed(glasses_data.get_current_glasses())
+	
+	sight_radius.set_visible(config.display_sight_radius)
+	if sight_radius.is_visible(): sight_radius_anim.play("random_fade")
+
+func animate() -> void:
+	var tw := get_tree().create_tween()
+	var rand_scale := Vector2(randf()*0.1 + 0.95, randf()*0.1 + 0.95)
+	var rand_alpha := randf() * 0.2 + 0.8
+	var rand_dur := randf_range(0.25, 0.5)
+	tw.tween_property(light, "scale", rand_scale, rand_dur)
+	tw.parallel().tween_property(light, "color:a", rand_alpha, rand_dur)
+	
+	rand_dur = randf_range(0.25, 0.5)
+	tw.tween_property(light, "scale", Vector2.ONE, rand_dur)
+	tw.parallel().tween_property(light, "color:a", 1.0, rand_dur)
+	tw.tween_callback(animate)
 
 func _input(ev:InputEvent) -> void:
 	var side := 0
@@ -19,22 +44,40 @@ func _input(ev:InputEvent) -> void:
 	elif ev.is_action_released("look_right"):
 		side = +1
 	elif ev is InputEventMouseButton:
-		side = +1
-		if get_global_mouse_position().x < entity.position.x: 
-			side = -1
+		var not_over_ui : bool = ev.position.y < (get_viewport_rect().size.y-128.0)
+		if not_over_ui:
+			side = -1 if get_global_mouse_position().x < entity.position.x else +1
 	
 	if side == 0: return
 	look_to_side(side)
 
 func look_to_side(new_dir:int) -> void:
+	if dir == new_dir: return
+
 	dir = new_dir
 	flash_light.scale.x = new_dir
 	player_data.side_looking = dir
-	reveal_ghosts_on_our_side()
+	check_ghost_appearance()
 	dir_changed.emit(dir)
+	
+	audio_player.pitch_scale = randf_range(0.9, 1.1)
+	audio_player.play()
 
-# @TODO: probably want a distance check as well, depending on default value + glasses
-func reveal_ghosts_on_our_side() -> void:
+func check_ghost_appearance() -> void:
 	var all_ghosts := ghost_data.ghosts
 	for ghost in all_ghosts:
-		ghost.set_visible(player_data.should_ghost_be_visible(ghost))
+		ghost.change_appearance(player_data.should_ghost_be_visible(ghost))
+
+func ghost_is_in_range(ghost:Ghost) -> bool:
+	return ghost.position.distance_to(entity.position) <= (glasses_data.get_current_glasses().range_see * config.glasses_def_range_see)
+
+func set_light_properties(col:Color, tex:Texture2D) -> void:
+	light.color = col
+	light.texture = tex
+
+func on_glasses_changed(new_glasses:GlassesTypeData) -> void:
+	var range := new_glasses.range_see * config.glasses_def_range_see
+	var range_as_scale := range/128.0 * 2 # divide by base sprite size, multiply by 2 because scale is full width and radius only half the circle of course
+	sight_radius.set_scale(Vector2.ONE * range_as_scale)
+	check_ghost_appearance()
+	

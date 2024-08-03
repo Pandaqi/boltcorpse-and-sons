@@ -1,0 +1,11 @@
+[gd_resource type="ShaderMaterial" load_steps=2 format=3 uid="uid://cfg3snrvh2kwy"]
+
+[ext_resource type="Shader" path="res://player/dotted_circle.gdshader" id="1_ewk5f"]
+
+[resource]
+shader = ExtResource("1_ewk5f")
+shader_parameter/color = Color(0.45, 0.459, 0.947, 1)
+shader_parameter/diameter = 1.0
+shader_parameter/thickness = 0.01
+shader_parameter/frequency = 100.0
+shader_parameter/phase = 0.0

@@ -1,6 +1,5 @@
-[gd_scene load_steps=25 format=3 uid="uid://dwq6ly1p8qy12"]
+[gd_scene load_steps=33 format=3 uid="uid://dwq6ly1p8qy12"]
 
-[ext_resource type="Texture2D" uid="uid://dsoefc7aqga86" path="res://icon.svg" id="1_1skar"]
 [ext_resource type="Script" path="res://game_loop/main/main.gd" id="1_psqdd"]
 [ext_resource type="Script" path="res://game_loop/main/camera.gd" id="2_k0pq2"]
 [ext_resource type="Script" path="res://game_loop/main/progression/progression.gd" id="2_refyh"]
@@ -9,6 +8,8 @@
 [ext_resource type="Script" path="res://game_loop/main/progression/progression_data.gd" id="3_qqng1"]
 [ext_resource type="Script" path="res://map/spawner/spawner.gd" id="5_chqyf"]
 [ext_resource type="Resource" uid="uid://crb1nt4ffy00e" path="res://player/player_data.tres" id="6_6f3qk"]
+[ext_resource type="Resource" uid="uid://u6olkls3fh7k" path="res://game_loop/globals/config.tres" id="6_v3qas"]
+[ext_resource type="Texture2D" uid="uid://ckrvmagmbff68" path="res://map/map_background.webp" id="7_utypa"]
 [ext_resource type="PackedScene" uid="uid://corstd1u70a0h" path="res://player/player.tscn" id="8_wvqor"]
 [ext_resource type="Resource" uid="uid://7ndijft3aqws" path="res://ghosts/ghost_data.tres" id="9_esefb"]
 [ext_resource type="Script" path="res://ui/lives/lives.gd" id="9_pjnn6"]
@@ -17,12 +18,70 @@
 [ext_resource type="Script" path="res://ui/glasses/glasses.gd" id="12_jw1td"]
 [ext_resource type="Resource" uid="uid://d21b842whii5" path="res://player/glasses/glasses_data.tres" id="13_7mas8"]
 [ext_resource type="PackedScene" uid="uid://c8qgvdiwwqt1c" path="res://ui/glasses/glasses_sprite.tscn" id="13_hw63y"]
+[ext_resource type="PackedScene" uid="uid://bfnj7yvk0hwyk" path="res://ui/tutorial/tutorial_ghost.tscn" id="13_trmc1"]
+[ext_resource type="Script" path="res://ui/tutorial/tutorial.gd" id="13_y52ka"]
+[ext_resource type="PackedScene" uid="uid://cwp1ogr5nvk82" path="res://ui/tutorial/tutorial_glasses.tscn" id="15_k4nl8"]
+[ext_resource type="FontFile" uid="uid://c4b8314vpi2qp" path="res://ui/fonts/body_italic.ttf" id="15_nmds6"]
 [ext_resource type="FontFile" uid="uid://c8k2wnr8js0r2" path="res://ui/fonts/heading.ttf" id="16_hmwjp"]
 [ext_resource type="Script" path="res://game_loop/main/game_over.gd" id="16_xyl3x"]
 [ext_resource type="Theme" uid="uid://jnbucre5g4fs" path="res://ui/default_theme.tres" id="17_citkh"]
+[ext_resource type="AudioStream" uid="uid://dw0fx81i13r68" path="res://player/flashlight_switch.ogg" id="22_4bn4i"]
+[ext_resource type="Texture2D" uid="uid://3r4qex0exhe8" path="res://ui/nine_patch_rect.tres" id="22_7psni"]
+[ext_resource type="FontFile" uid="uid://cncklelvw6sx3" path="res://ui/fonts/body_bold.ttf" id="24_u04i1"]
 
 [sub_resource type="Resource" id="Resource_3hy7l"]
 script = ExtResource("3_qqng1")
+
+[sub_resource type="Animation" id="Animation_u84je"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("ColorRect:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("CenterContainer/VBoxContainer/Heading:modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 0)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("CenterContainer/VBoxContainer/RichTextLabel:modulate")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 0)]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("CenterContainer/VBoxContainer/HBoxContainer:modulate")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 0)]
+}
 
 [sub_resource type="Animation" id="Animation_qnt2k"]
 resource_name = "game_over_appear"
@@ -76,57 +135,6 @@ tracks/3/keys = {
 "values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1)]
 }
 
-[sub_resource type="Animation" id="Animation_u84je"]
-length = 0.001
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("ColorRect:modulate")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Color(1, 1, 1, 0)]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("CenterContainer/VBoxContainer/Heading:modulate")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Color(1, 1, 1, 0)]
-}
-tracks/2/type = "value"
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/path = NodePath("CenterContainer/VBoxContainer/RichTextLabel:modulate")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Color(1, 1, 1, 0)]
-}
-tracks/3/type = "value"
-tracks/3/imported = false
-tracks/3/enabled = true
-tracks/3/path = NodePath("CenterContainer/VBoxContainer/HBoxContainer:modulate")
-tracks/3/interp = 1
-tracks/3/loop_wrap = true
-tracks/3/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Color(1, 1, 1, 0)]
-}
-
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_rjbok"]
 _data = {
 "RESET": SubResource("Animation_u84je"),
@@ -139,35 +147,48 @@ script = ExtResource("1_psqdd")
 [node name="Progression" type="Node" parent="."]
 script = ExtResource("2_refyh")
 prog_data = SubResource("Resource_3hy7l")
+glasses_data = ExtResource("13_7mas8")
+ghost_data = ExtResource("9_esefb")
+config = ExtResource("6_v3qas")
 
 [node name="Timer" type="Timer" parent="Progression"]
 autostart = true
 
+[node name="TimerUnlock" type="Timer" parent="Progression"]
+one_shot = true
+
 [node name="Camera2D" type="Camera2D" parent="."]
+process_mode = 3
 script = ExtResource("2_k0pq2")
 player_data = ExtResource("6_6f3qk")
+config = ExtResource("6_v3qas")
+
+[node name="Player" parent="." instance=ExtResource("8_wvqor")]
 
 [node name="Map" type="Node2D" parent="."]
+process_mode = 3
 script = ExtResource("2_ykd0i")
 
 [node name="CanvasModulate" type="CanvasModulate" parent="Map"]
-color = Color(0.2484, 0.2484, 0.2484, 1)
+color = Color(0.104374, 0.0928246, 0.131456, 1)
 
-[node name="Sprite2D" type="Sprite2D" parent="Map"]
-modulate = Color(0.529067, 0.529067, 0.529067, 1)
-position = Vector2(-6.10352e-05, 0)
-scale = Vector2(20.875, 11.8844)
-texture = ExtResource("1_1skar")
+[node name="BG" type="Sprite2D" parent="Map"]
+z_index = -100
+z_as_relative = false
+texture_repeat = 2
+texture = ExtResource("7_utypa")
+region_enabled = true
+region_rect = Rect2(0, 0, 1024, 1024)
 
 [node name="SpawnerGhosts" type="Node2D" parent="Map"]
+process_mode = 1
 script = ExtResource("5_chqyf")
 ghost_scene = ExtResource("3_jyu2n")
 player_data = ExtResource("6_6f3qk")
 ghost_data = ExtResource("9_esefb")
+config = ExtResource("6_v3qas")
 
 [node name="Timer" type="Timer" parent="Map/SpawnerGhosts"]
-
-[node name="Player" parent="." instance=ExtResource("8_wvqor")]
 
 [node name="UI" type="CanvasLayer" parent="."]
 script = ExtResource("9_rid4j")
@@ -181,6 +202,158 @@ script = ExtResource("12_jw1td")
 glasses_sprite = ExtResource("13_hw63y")
 glasses_data = ExtResource("13_7mas8")
 
+[node name="Tutorial" type="Node2D" parent="UI"]
+process_mode = 3
+script = ExtResource("13_y52ka")
+config = ExtResource("6_v3qas")
+
+[node name="StartingHints" type="Node2D" parent="UI/Tutorial"]
+modulate = Color(1, 1, 1, 0.724)
+
+[node name="StartingHintLeft" type="Node2D" parent="UI/Tutorial/StartingHints"]
+position = Vector2(-1111, 32)
+scale = Vector2(0.1, 0.1)
+
+[node name="KeyLeft1" type="Node2D" parent="UI/Tutorial/StartingHints/StartingHintLeft"]
+position = Vector2(-626.715, -213.571)
+
+[node name="Sprite2D" type="Sprite2D" parent="UI/Tutorial/StartingHints/StartingHintLeft/KeyLeft1"]
+texture = ExtResource("22_7psni")
+
+[node name="Label" type="Label" parent="UI/Tutorial/StartingHints/StartingHintLeft/KeyLeft1"]
+offset_left = -240.0
+offset_top = -235.0
+offset_right = 237.0
+offset_bottom = 200.0
+theme = ExtResource("17_citkh")
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("24_u04i1")
+theme_override_font_sizes/font_size = 256
+text = "<"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="KeyLeft2" type="Node2D" parent="UI/Tutorial/StartingHints/StartingHintLeft"]
+position = Vector2(-100.715, -213.571)
+
+[node name="Sprite2D" type="Sprite2D" parent="UI/Tutorial/StartingHints/StartingHintLeft/KeyLeft2"]
+texture = ExtResource("22_7psni")
+
+[node name="Label" type="Label" parent="UI/Tutorial/StartingHints/StartingHintLeft/KeyLeft2"]
+offset_left = -240.0
+offset_top = -235.0
+offset_right = 237.0
+offset_bottom = 200.0
+theme = ExtResource("17_citkh")
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("24_u04i1")
+theme_override_font_sizes/font_size = 256
+text = "A"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="KeyLeft3" type="Label" parent="UI/Tutorial/StartingHints/StartingHintLeft"]
+offset_left = 214.285
+offset_top = -448.571
+offset_right = 904.285
+offset_bottom = -13.5714
+theme = ExtResource("17_citkh")
+theme_override_fonts/font = ExtResource("24_u04i1")
+theme_override_font_sizes/font_size = 128
+text = "Click here"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="KeyLeft4" type="Label" parent="UI/Tutorial/StartingHints/StartingHintLeft"]
+offset_left = -845.715
+offset_top = 53.4286
+offset_right = 915.285
+offset_bottom = 494.429
+theme = ExtResource("17_citkh")
+theme_override_fonts/font = ExtResource("15_nmds6")
+theme_override_font_sizes/font_size = 128
+text = "To point your flashlight to the left and see what's here."
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 3
+
+[node name="StartingHintRight" type="Node2D" parent="UI/Tutorial/StartingHints"]
+position = Vector2(995, 32)
+scale = Vector2(0.1, 0.1)
+
+[node name="KeyLeft1" type="Node2D" parent="UI/Tutorial/StartingHints/StartingHintRight"]
+position = Vector2(-626.715, -213.571)
+
+[node name="Sprite2D" type="Sprite2D" parent="UI/Tutorial/StartingHints/StartingHintRight/KeyLeft1"]
+texture = ExtResource("22_7psni")
+
+[node name="Label" type="Label" parent="UI/Tutorial/StartingHints/StartingHintRight/KeyLeft1"]
+offset_left = -240.0
+offset_top = -235.0
+offset_right = 237.0
+offset_bottom = 200.0
+theme = ExtResource("17_citkh")
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("24_u04i1")
+theme_override_font_sizes/font_size = 256
+text = ">"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="KeyLeft2" type="Node2D" parent="UI/Tutorial/StartingHints/StartingHintRight"]
+position = Vector2(-100.715, -213.571)
+
+[node name="Sprite2D" type="Sprite2D" parent="UI/Tutorial/StartingHints/StartingHintRight/KeyLeft2"]
+texture = ExtResource("22_7psni")
+
+[node name="Label" type="Label" parent="UI/Tutorial/StartingHints/StartingHintRight/KeyLeft2"]
+offset_left = -240.0
+offset_top = -235.0
+offset_right = 237.0
+offset_bottom = 200.0
+theme = ExtResource("17_citkh")
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("24_u04i1")
+theme_override_font_sizes/font_size = 256
+text = "D"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="KeyLeft3" type="Label" parent="UI/Tutorial/StartingHints/StartingHintRight"]
+offset_left = 214.285
+offset_top = -448.571
+offset_right = 904.285
+offset_bottom = -13.5714
+theme = ExtResource("17_citkh")
+theme_override_fonts/font = ExtResource("24_u04i1")
+theme_override_font_sizes/font_size = 128
+text = "Click here"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="KeyLeft4" type="Label" parent="UI/Tutorial/StartingHints/StartingHintRight"]
+offset_left = -845.715
+offset_top = 53.4286
+offset_right = 915.285
+offset_bottom = 494.429
+theme = ExtResource("17_citkh")
+theme_override_fonts/font = ExtResource("15_nmds6")
+theme_override_font_sizes/font_size = 128
+text = "To point your flashlight to the right and see what's here."
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 3
+
+[node name="Timer" type="Timer" parent="UI/Tutorial/StartingHints"]
+one_shot = true
+
+[node name="TutorialGhost" parent="UI/Tutorial" instance=ExtResource("13_trmc1")]
+
+[node name="TutorialGlasses" parent="UI/Tutorial" instance=ExtResource("15_k4nl8")]
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="UI/Tutorial"]
+stream = ExtResource("22_4bn4i")
+
 [node name="GameOver" type="Control" parent="UI"]
 process_mode = 3
 layout_mode = 3
@@ -190,6 +363,7 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("16_xyl3x")
+player_data = ExtResource("6_6f3qk")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="UI/GameOver"]
 libraries = {
@@ -204,7 +378,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-color = Color(0, 0, 0, 1)
+color = Color(0, 0, 0, 0.560784)
 
 [node name="CenterContainer" type="CenterContainer" parent="UI/GameOver"]
 layout_mode = 1
@@ -253,6 +427,8 @@ theme = ExtResource("17_citkh")
 text = "Try Again"
 
 [connection signal="timeout" from="Progression/Timer" to="Progression" method="on_timer_timeout"]
+[connection signal="timeout" from="Progression/TimerUnlock" to="Progression" method="_on_timer_unlock_timeout"]
 [connection signal="timeout" from="Map/SpawnerGhosts/Timer" to="Map/SpawnerGhosts" method="on_timer_timeout"]
+[connection signal="timeout" from="UI/Tutorial/StartingHints/Timer" to="UI/Tutorial" method="_on_timer_timeout"]
 [connection signal="pressed" from="UI/GameOver/CenterContainer/VBoxContainer/HBoxContainer/Back" to="UI/GameOver" method="_on_back_pressed"]
 [connection signal="pressed" from="UI/GameOver/CenterContainer/VBoxContainer/HBoxContainer/Continue" to="UI/GameOver" method="_on_continue_pressed"]

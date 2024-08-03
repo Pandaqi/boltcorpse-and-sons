@@ -1,0 +1,10 @@
+[gd_scene load_steps=2 format=3 uid="uid://dx4k7w6fsst5v"]
+
+[ext_resource type="Texture2D" uid="uid://bs3wojv1b77ln" path="res://game_loop/misc.webp" id="1_jtoyp"]
+
+[node name="Sprite2D" type="Sprite2D"]
+scale = Vector2(0.2, 0.2)
+texture = ExtResource("1_jtoyp")
+hframes = 4
+vframes = 4
+frame = 5

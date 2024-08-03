@@ -1,0 +1,7 @@
+[gd_resource type="AtlasTexture" load_steps=2 format=3 uid="uid://d2nddmc55swel"]
+
+[ext_resource type="Texture2D" uid="uid://mevdh6xom5tq" path="res://player/light_sprites/light_sprites.webp" id="1_su4wv"]
+
+[resource]
+atlas = ExtResource("1_su4wv")
+region = Rect2(0, 0, 1024, 512)

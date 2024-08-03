@@ -1,6 +1,7 @@
-[gd_resource type="Resource" script_class="GhostMovementData" load_steps=2 format=3 uid="uid://wayuvxokne4e"]
+[gd_resource type="Resource" script_class="MovementFloatSimple" load_steps=2 format=3 uid="uid://dc4sx5sirmrut"]
 
-[ext_resource type="Script" path="res://ghosts/types_movement/ghost_movement_data.gd" id="1_82fs2"]
+[ext_resource type="Script" path="res://ghosts/types_movement/float_simple.gd" id="1_fot26"]
 
 [resource]
-script = ExtResource("1_82fs2")
+script = ExtResource("1_fot26")
+speed = 1.0

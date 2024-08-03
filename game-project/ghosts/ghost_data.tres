@@ -1,6 +1,12 @@
-[gd_resource type="Resource" script_class="GhostData" load_steps=2 format=3 uid="uid://7ndijft3aqws"]
+[gd_resource type="Resource" script_class="GhostData" load_steps=5 format=3 uid="uid://7ndijft3aqws"]
 
+[ext_resource type="Script" path="res://ghosts/types/ghost_type_data.gd" id="1_25ico"]
 [ext_resource type="Script" path="res://ghosts/ghost_data.gd" id="1_fxnyv"]
+[ext_resource type="Resource" uid="uid://dunsu8wxxemwt" path="res://ghosts/types/ghost_regular.tres" id="2_y6q67"]
+[ext_resource type="Resource" uid="uid://crb1nt4ffy00e" path="res://player/player_data.tres" id="3_aem8q"]
 
 [resource]
 script = ExtResource("1_fxnyv")
+all_ghosts = Array[ExtResource("1_25ico")]([ExtResource("2_y6q67")])
+starting_ghosts = Array[ExtResource("1_25ico")]([ExtResource("2_y6q67")])
+player_data = ExtResource("3_aem8q")

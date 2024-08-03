@@ -1,6 +1,6 @@
 class_name UIGlasses extends Node2D
 
-var sprite_size := 64.0
+var sprite_size := 92.0
 var sprites := []
 @export var glasses_sprite : PackedScene
 @export var glasses_data : GlassesData
@@ -13,7 +13,7 @@ func activate() -> void:
 
 func on_resize() -> void:
 	var vp = get_viewport_rect().size
-	set_position(Vector2(0.5*vp.x, vp.y - sprite_size*1.5))
+	set_position(Vector2(0.5*vp.x, vp.y - sprite_size*1.15))
 
 func highlight_index(idx:int) -> void:
 	if cur_highlighted_node: cur_highlighted_node.unfocus()
@@ -34,3 +34,5 @@ func update_glasses(_new_glasses:Array[GlassesTypeData]) -> void:
 		var sprite = sprites[i]
 		sprite.set_visible(should_show)
 		sprite.set_position(global_offset + i * offset_per_sprite)
+		sprite.set_data(i, glasses_data.elements[i])
+		sprite.enable_key_hint()

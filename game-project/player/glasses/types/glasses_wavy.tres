@@ -1,0 +1,17 @@
+[gd_resource type="Resource" script_class="GlassesTypeData" load_steps=3 format=3 uid="uid://bl3wwb1qnh3c6"]
+
+[ext_resource type="Texture2D" uid="uid://bw6hl1wn4lvod" path="res://player/light_sprites/light_sprite_sine.webp" id="1_d5jxt"]
+[ext_resource type="Script" path="res://player/glasses/types/glasses_type_data.gd" id="2_1ymqh"]
+
+[resource]
+script = ExtResource("2_1ymqh")
+frame = 3
+damage = 1.25
+light_color = Color(1, 0.572549, 0.490196, 1)
+light_shape = ExtResource("1_d5jxt")
+range_kill = 1.33
+range_see = 1.33
+desc = "Slightly better at everything, but also speeds up all ghosts."
+pierce_shield = false
+ghost_speed_scale = 2.35
+lives_taken_override = -1

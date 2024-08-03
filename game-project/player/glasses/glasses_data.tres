@@ -1,6 +1,15 @@
-[gd_resource type="Resource" script_class="GlassesData" load_steps=2 format=3 uid="uid://d21b842whii5"]
+[gd_resource type="Resource" script_class="GlassesData" load_steps=9 format=3 uid="uid://d21b842whii5"]
 
+[ext_resource type="Script" path="res://player/glasses/types/glasses_type_data.gd" id="1_3vejd"]
 [ext_resource type="Script" path="res://player/glasses/glasses_data.gd" id="1_wedx7"]
+[ext_resource type="Resource" uid="uid://bcsj5jor77soy" path="res://player/glasses/types/glasses_circle.tres" id="2_0airq"]
+[ext_resource type="Resource" uid="uid://3uyjv33ebyab" path="res://player/glasses/types/glasses_holes.tres" id="3_if45y"]
+[ext_resource type="Resource" uid="uid://dss2ed0sq2jvf" path="res://player/glasses/types/glasses_invert.tres" id="4_1huwj"]
+[ext_resource type="Resource" uid="uid://w7pjkjmpencg" path="res://player/glasses/types/glasses_rectangle.tres" id="5_cag2a"]
+[ext_resource type="Resource" uid="uid://dnbl5jf6kg8f6" path="res://player/glasses/types/glasses_triangle.tres" id="6_lcoj4"]
+[ext_resource type="Resource" uid="uid://bl3wwb1qnh3c6" path="res://player/glasses/types/glasses_wavy.tres" id="7_isw0g"]
 
 [resource]
 script = ExtResource("1_wedx7")
+all_glasses = Array[ExtResource("1_3vejd")]([ExtResource("2_0airq"), ExtResource("3_if45y"), ExtResource("4_1huwj"), ExtResource("5_cag2a"), ExtResource("6_lcoj4"), ExtResource("7_isw0g")])
+starting_glasses = Array[ExtResource("1_3vejd")]([ExtResource("2_0airq")])

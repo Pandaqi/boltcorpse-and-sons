@@ -1,10 +1,81 @@
-[gd_scene load_steps=2 format=3 uid="uid://cysh2j4w6u1of"]
+[gd_scene load_steps=6 format=3 uid="uid://cysh2j4w6u1of"]
 
-[ext_resource type="Texture2D" uid="uid://dsoefc7aqga86" path="res://icon.svg" id="1_yh1pw"]
+[ext_resource type="Script" path="res://ui/lives/life_sprite.gd" id="1_3kxc2"]
+[ext_resource type="Texture2D" uid="uid://bs3wojv1b77ln" path="res://game_loop/misc.webp" id="1_ekwcc"]
+
+[sub_resource type="Animation" id="Animation_ps70a"]
+resource_name = "appear"
+length = 0.4
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.166667, 0.266667),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector2(1e-05, 1e-05), Vector2(1.2, 1.2), Vector2(1, 1)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:rotation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.2, 0.266667, 0.333333, 0.4),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"update": 0,
+"values": [0.0, -0.523599, 0.261799, -0.1309, 0.0]
+}
+
+[sub_resource type="Animation" id="Animation_gvdc7"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(1e-05, 1e-05)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:rotation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_lnheg"]
+_data = {
+"RESET": SubResource("Animation_gvdc7"),
+"appear": SubResource("Animation_ps70a")
+}
 
 [node name="LifeSprite" type="Node2D"]
+scale = Vector2(1e-05, 1e-05)
+script = ExtResource("1_3kxc2")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
-modulate = Color(0.931365, 0.669742, 0.94068, 1)
-scale = Vector2(0.5, 0.5)
-texture = ExtResource("1_yh1pw")
+scale = Vector2(0.125, 0.125)
+texture = ExtResource("1_ekwcc")
+hframes = 4
+vframes = 4
+frame = 1
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_lnheg")
+}

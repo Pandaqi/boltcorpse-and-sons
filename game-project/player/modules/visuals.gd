@@ -1,14 +1,15 @@
 class_name ModuleVisuals extends Node2D
 
 @onready var sprite : Sprite2D = $Sprite2D
+@onready var anim_player : AnimationPlayer = $AnimationPlayer
+@export var sprite_size := Vector2(512.0, 512.0)
 
-func activate(l:ModuleLooker) -> void:
+func activate(l:ModuleLooker, lives:ModuleLives) -> void:
 	l.dir_changed.connect(on_dir_changed)
+	lives.lives_changed.connect(on_lives_changed)
+
+func on_lives_changed(_new_lives:int) -> void:
+	anim_player.play("flash")
 
 func on_dir_changed(dir:int) -> void:
-	sprite.flip_v = dir < 0
-
-# @TODO: need something cleaner for centering/zooming camera, but this'll do for now
-func get_bounds() -> Rect2:
-	var sprite_size := Vector2(256.0, 256.0)
-	return Rect2(global_position.x -0.5*sprite_size.x, global_position.y -0.5*sprite_size.y, sprite_size.x, sprite_size.y)
+	sprite.flip_h = dir < 0
