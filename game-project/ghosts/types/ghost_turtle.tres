@@ -1,0 +1,20 @@
+[gd_resource type="Resource" script_class="GhostTypeData" load_steps=4 format=3 uid="uid://bwulub71s73bm"]
+
+[ext_resource type="Script" path="res://ghosts/types/ghost_type_data.gd" id="1_i5mxd"]
+[ext_resource type="Resource" uid="uid://dc4sx5sirmrut" path="res://ghosts/types_movement/float_simple.tres" id="1_jmus4"]
+[ext_resource type="Script" path="res://player/glasses/types/glasses_type_data.gd" id="2_1its7"]
+
+[resource]
+script = ExtResource("1_i5mxd")
+frame = 2
+desc = "A ghost with high health, but a very low speed. Also emits no light."
+range_attack = 1.0
+lives_taken = 1
+weak_glasses = Array[ExtResource("2_1its7")]([])
+health = 3.0
+shield = 1.0
+speed = 0.25
+movement = ExtResource("1_jmus4")
+effects = []
+self_light = false
+value = 1.0

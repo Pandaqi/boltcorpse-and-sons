@@ -1,12 +1,21 @@
 class_name MovementFloatSimple extends GhostMovementData
 
-var config : Config = preload("res://game_loop/globals/config.tres")
-var player_data : PlayerData = preload("res://player/player_data.tres")
+@export var only_when_looking := false
+@export var speed_scale_start := 1.0
+@export var speed_scale_end := 1.0
+@export var speed_scale_max_dist := 3000
 
 func _process(dt:float, g:Ghost) -> void:
 	if not player_data.player: return
 	
-	var vec : Vector2 = g.global_position.direction_to(player_data.player.global_position).normalized()
-	var final_speed = speed * config.ghosts_def_speed
-	var new_pos = g.get_position() + vec * final_speed * dt
-	g.set_position(new_pos)
+	# basically weeping angels only
+	if only_when_looking and player_data.on_viewed_side(g): return
+	
+	# depending on distance to player, we speed up or slow down
+	var ratio_traveled_raw := g.position.distance_to(player_data.player.position) / speed_scale_max_dist
+	var ratio_traveled_clamped = 1.0 - clamp(ratio_traveled_raw, 0.0, 1.0)
+	
+	var cur_speed : float = speed * lerp(speed_scale_start, speed_scale_end, ratio_traveled_clamped)
+	
+	# finally, move towards player with our current settings
+	move_straight(dt, g, cur_speed)

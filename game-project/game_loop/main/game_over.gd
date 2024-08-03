@@ -3,6 +3,7 @@ class_name GameOver extends Control
 @export var player_data : PlayerData
 @onready var anim_player : AnimationPlayer = $AnimationPlayer
 @onready var rich_label : RichTextLabel = $CenterContainer/VBoxContainer/RichTextLabel
+@onready var audio_player : AudioStreamPlayer = $AudioStreamPlayer
 
 var active := false
 
@@ -11,6 +12,8 @@ func activate():
 	set_visible(false)
 
 func appear() -> void:
+	audio_player.play()
+	
 	# QOL: to let sound effects and animations play out
 	await get_tree().create_timer(1.0).timeout
 	
@@ -34,8 +37,7 @@ func _input(ev:InputEvent) -> void:
 
 func _on_back_pressed() -> void:
 	get_tree().paused = false
-	pass
-	#get_tree().change_scene_to_packed(preload("res://game_loop/menu/menu.tscn"))
+	get_tree().change_scene_to_packed(preload("res://game_loop/menu/menu.tscn"))
 
 func _on_continue_pressed() -> void:
 	get_tree().paused = false

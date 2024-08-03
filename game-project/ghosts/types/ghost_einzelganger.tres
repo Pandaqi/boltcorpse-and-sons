@@ -1,0 +1,21 @@
+[gd_resource type="Resource" script_class="GhostTypeData" load_steps=4 format=3 uid="uid://dr0o17qidm1or"]
+
+[ext_resource type="Resource" uid="uid://bjfatsoqd245u" path="res://ghosts/types_movement/movement_einzelganger.tres" id="1_d8rcv"]
+[ext_resource type="Script" path="res://ghosts/types/ghost_type_data.gd" id="1_f2ox2"]
+[ext_resource type="Script" path="res://player/glasses/types/glasses_type_data.gd" id="2_rkrl2"]
+
+[resource]
+script = ExtResource("1_f2ox2")
+frame = 9
+desc = "Fast, but only moves if nobody else is nearby."
+range_attack = 1.0
+lives_taken = 1
+weak_glasses = Array[ExtResource("2_rkrl2")]([])
+health = 1.0
+shield = 0.0
+speed = 2.25
+movement = ExtResource("1_d8rcv")
+effects = []
+self_light = true
+value = 1.0
+max_num = 1

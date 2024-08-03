@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="MovementFloatSimple" load_steps=2 format=3 uid="uid://bivgffeso1odi"]
+
+[ext_resource type="Script" path="res://ghosts/types_movement/float_simple.gd" id="1_h6csj"]
+
+[resource]
+script = ExtResource("1_h6csj")
+only_when_looking = false
+speed_scale_start = 2.1
+speed_scale_end = 0.4
+speed_scale_max_dist = 3000
+speed = 1.0

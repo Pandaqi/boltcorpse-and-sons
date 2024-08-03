@@ -41,76 +41,58 @@ You only see one side of the game at a time. Ghosts spawn on either side.
 
 ## CRUCIAL TODO
 
-In this order:
-* Lay groundwork for CONTROLLING GHOST SPAWNING
-* Add some debug config for skipping tutorial + forcibly insta-spawning ghost types.
-* Create the ghosts.
-  * Resources for all types + code for movement
-  * Add all to list to be chosen
-  * Draw their graphics
-* Draw the glasses graphics.
-* Any finetuning/polishing
-
-Glasses: Draw the remaining graphics
-* Goggles are shaped like their regular shape
-* Move around the details a bit (flames, texture, etcetera)
-
-Ghosts
-* Scale NUMBER of ghosts that spawn at most ( + time between them) on Progression
-* Create the different types + their tutorials
-* Some completely different movement patterns
-  * Only move if (not) watching ("El Weepo Angelo")
-  * Move in _jumps_
-  * Speed up/Slow down over time
-  * Only move if weak glasses watching
-  * Go forward-backward-forward-backward ("The Dancing Ghost")
-
-
 Juice/Polishing:
-* Satisfying particles when ghost dies (long swirls traveling upward with the ghost?)
-* (Some particles when you get hit?)
-* Creepy soundtrack/ambience
-
-
-## OPTIONAL TODO
+* We have more ghosts than glasses, so maybe stop alternating between them? Start with glasses and then we'll see?
+* Sometimes it's a bit meh when you can see ghosts but can't kill them yet
+  * **@IDEA: The longer you stay in one view, the further your kill radius/sight radius grows?** Yes, seems fair.
+  * **@IDEA: Then also simply test growing STRONGER the longer you stay in that view.**
+* Feedback when trying to use the wrong glasses on a ghost? (Or a clear tutorial thing/hint that actually explains this?)
+  * **@IDEA: Highlight the glasses sprite when a ghost is being targeted** => this should reinforce that rule without needing to explain it.
 
 Player Progression:
-* Now the ghosts escalate, but you don't necessarily do. So maybe there are powerups or something that will make _all_ goggles faster at damage, or _all_ ghosts slower, or something. (Maybe this is a choice: whenever a new ghost is introduced, you can also choose "Ghosts are 10% slower" OR "Every goggle does +5 damage")
-* Those special effects/curses of ghosts?
-
-Game Loop:
-* Create main menu? (If we do that, we should have our marketing image finished, otherwise it looks silly.)
-
-Juice:
-* Also show the Glasses equipped _on the player_? (Give the player some idle animation or something?)
-* Game start/end sound (though the sparseness actually works with this theme?)
-* Actually animate the ghosts
+* Test automatically scaling parameters based on Progression
 
 
-Devlog => mention that I wanted to continue my challenge of using custom resources in Godot, now by making them _behavior defining_ such as giving ghosts completely different movement by just slotting them in
+## STRETCH GOALS
+
+
+* For difficulty control / better progression
+  * Now the ghosts escalate, but you don't necessarily do. So maybe there are powerups or something that will make _all_ goggles faster at damage, or _all_ ghosts slower, or something. (Maybe this is a choice: whenever a new ghost is introduced, you can ALSO choose "Ghosts are 10% slower" OR "Every goggle does +5 damage")
+  * When determining ghost and glasses order, don't be completely random. Leave those with a higher value ( = harder) for _later_? (Should work, but I haven't actually assigned values to glasses and ghosts currently.)
 
 @IDEA: Get powerups/new glasses/something more _proactively_?
 * Probably just by _seeing them_ for long enough, to neatly re-use the same mechanics everywhere. => **This is actually really promising, but I don't have time to put it into the game now.**
 * (Or have one-time goggles that, when selected, will instantly trigger whatever they do and then disappear from your inventory.)
 
-@IDEA: For difficulty control.
-* When determining ghost and glasses order, don't be completely random. Leave those with a higher value ( = harder) for _later_?
+
+Juice:
+* Give the player some idle animation or something?
+* Actually animate the ghosts (as they move/crawl/whatever)
+
+Core Gameplay:
+* Those special effects/curses of ghosts?
+
+Devlog => 
+* Mention that I wanted to continue my challenge of using custom resources in Godot, now by making them _behavior defining_ such as giving ghosts completely different movement by just slotting them in.
+* Mention using a scaling factor in config for all resources, so I can easily play around with values even after defining all ghosts/glasses/whatever
+
+
 
 
 ## Ghosts
 
-### Regular
+### [x] Regular (0)
 
 * Movement: Floaty
 * Health/Attack/Shield/Speed: Regular
 
-### Speedy
+### [x] Speedy (1)
 
 * Movement: Floaty
 * Speed++
 * Health--
 
-### Turtle
+### [x] Turtle (2)
 
 * Movement: Floaty
 * Speed--
@@ -118,40 +100,40 @@ Devlog => mention that I wanted to continue my challenge of using custom resourc
 * Shield+
 * SelfLight: false
 
-### Jumper
+### [x] Jumper (3)
 
 * Movement: Jump (sits still, suddenly jumps a gap, sits still again)
 
-### Dancer
+### [x] Dancer (4)
 
 * Movement: back-and-forth
 * Speed+
 * Shield+
 
-### Weeping Angel
+### [x] Weeping Angel (5)
 
 * Movement: Only moves when you're not looking. (Regardless of glasses you're wearing.)
 * Speed+
 * Health-
 * SelfLight: false
 
-### Monster
+### [x] Monster (6)
 
 * Movement: Floaty
 * Speed-
 * Shield+
 * Special: Takes away 2 lives on impact
 
-### Racer
+### [x] Racer (7)
 
 * Movement: Changes over time (speed-up)
 
-### Sleepwalker
+### [x] Sleepwalker (8)
 
 * Movement: Changes over time (slow-down)
 * SelfLight: false
 
-### Einzelganger
+### [x] Einzelganger (9)
 
 * Movement: only moves if no other ghosts are close
 * Speed++

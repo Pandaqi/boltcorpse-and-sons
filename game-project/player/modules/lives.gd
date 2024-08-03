@@ -3,6 +3,7 @@ class_name ModuleLives extends Node2D
 var lives := 0
 
 @onready var audio_player : AudioStreamPlayer2D = $AudioStreamPlayer2D
+@onready var particles : CPUParticles2D = $ParticlesLifeLost
 @export var config : Config
 
 signal empty()
@@ -18,6 +19,12 @@ func change_lives(dl:int) -> void:
 	if dl < 0:
 		audio_player.pitch_scale = randf_range(0.9, 1.1)
 		audio_player.play()
+		show_particles()
 	
 	if lives <= 0:
 		empty.emit()
+
+func show_particles() -> void:
+	particles.set_emitting(true)
+	await get_tree().process_frame
+	particles.set_emitting(false)

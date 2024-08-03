@@ -69,15 +69,15 @@ func check_ghost_appearance() -> void:
 		ghost.change_appearance(player_data.should_ghost_be_visible(ghost))
 
 func ghost_is_in_range(ghost:Ghost) -> bool:
-	return ghost.position.distance_to(entity.position) <= (glasses_data.get_current_glasses().range_see * config.glasses_def_range_see)
+	return ghost.global_position.distance_to(entity.global_position) <= (glasses_data.get_current_glasses().range_see * config.glasses_def_range_see)
 
 func set_light_properties(col:Color, tex:Texture2D) -> void:
 	light.color = col
 	light.texture = tex
 
 func on_glasses_changed(new_glasses:GlassesTypeData) -> void:
-	var range := new_glasses.range_see * config.glasses_def_range_see
-	var range_as_scale := range/128.0 * 2 # divide by base sprite size, multiply by 2 because scale is full width and radius only half the circle of course
+	var range_sight := new_glasses.range_see * config.glasses_def_range_see
+	var range_as_scale := range_sight/128.0 * 2 # divide by base sprite size, multiply by 2 because scale is full width and radius only half the circle of course
 	sight_radius.set_scale(Vector2.ONE * range_as_scale)
 	check_ghost_appearance()
 	

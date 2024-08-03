@@ -1,0 +1,20 @@
+[gd_resource type="Resource" script_class="GhostTypeData" load_steps=4 format=3 uid="uid://77ktwftriwoq"]
+
+[ext_resource type="Script" path="res://ghosts/types/ghost_type_data.gd" id="1_5xiwy"]
+[ext_resource type="Resource" uid="uid://btu2s7qm3fav" path="res://ghosts/types_movement/movement_dancer.tres" id="1_owtua"]
+[ext_resource type="Script" path="res://player/glasses/types/glasses_type_data.gd" id="2_2n7np"]
+
+[resource]
+script = ExtResource("1_5xiwy")
+frame = 4
+desc = "Randomly changes between going forward and backward."
+range_attack = 1.0
+lives_taken = 1
+weak_glasses = Array[ExtResource("2_2n7np")]([])
+health = 1.0
+shield = 0.5
+speed = 1.45
+movement = ExtResource("1_owtua")
+effects = []
+self_light = true
+value = 1.0

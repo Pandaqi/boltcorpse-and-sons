@@ -16,6 +16,8 @@ func set_elements(elems:Array[GlassesTypeData]) -> void:
 		sprite.queue_free()
 	
 	sprites = []
+	
+	# @NOTE: because we set the sprites in order of elems, which is just the list directly from glasses_data, everything should have the SAME ORDER as inventory (which is nice)
 	for elem in elems:
 		var s = glasses_sprite.instantiate()
 		add_child(s)
@@ -25,5 +27,4 @@ func set_elements(elems:Array[GlassesTypeData]) -> void:
 	var offset_per_sprite := Vector2.RIGHT * sprite_size
 	var global_offset := -0.5 * (sprites.size() - 1) * offset_per_sprite
 	for i in range(sprites.size()):
-		var num_in_inventory = glasses_data.get_index_of(elems[i]) # this means it's always sorted the same as your inventory, which is much nicer
-		sprites[i].set_position(global_offset + num_in_inventory * offset_per_sprite)
+		sprites[i].set_position(global_offset + i * offset_per_sprite)

@@ -1,0 +1,21 @@
+[gd_resource type="Resource" script_class="GhostTypeData" load_steps=4 format=3 uid="uid://dpwvdu6h86qrm"]
+
+[ext_resource type="Resource" uid="uid://dc4sx5sirmrut" path="res://ghosts/types_movement/float_simple.tres" id="1_8ba81"]
+[ext_resource type="Script" path="res://ghosts/types/ghost_type_data.gd" id="1_h1lq1"]
+[ext_resource type="Script" path="res://player/glasses/types/glasses_type_data.gd" id="2_3yixv"]
+
+[resource]
+script = ExtResource("1_h1lq1")
+frame = 6
+desc = "Hard to kill, and takes away 2 lives on impact."
+range_attack = 1.0
+lives_taken = 2
+weak_glasses = Array[ExtResource("2_3yixv")]([])
+health = 1.33
+shield = 1.0
+speed = 0.75
+movement = ExtResource("1_8ba81")
+effects = []
+self_light = true
+value = 1.0
+max_num = 5

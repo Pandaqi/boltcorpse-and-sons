@@ -19,7 +19,7 @@ var unlock_interval : = 0.0
 func activate(p:Player, go:GameOver, t:Tutorial) -> void:
 	game_over = go
 	tutorial = t
-	prog_data.reset()
+	prog_data.reset(Time.get_ticks_msec(), config.prog_max_time)
 	p.lives.empty.connect(on_lives_empty)
 	
 	unlock_interval = config.prog_interval_between_unlocks
@@ -30,6 +30,9 @@ func generate_unlock_order() -> void:
 	# cut out the ones we must start with
 	glasses_data.reset()
 	var starting_glasses = glasses_data.starting_glasses
+	if OS.is_debug_build() and config.debug_force_glasses.size() > 0:
+		starting_glasses = config.debug_force_glasses
+	
 	var all_glasses = glasses_data.all_glasses.duplicate(false)
 	for g in starting_glasses:
 		all_glasses.erase(g)
@@ -39,6 +42,9 @@ func generate_unlock_order() -> void:
 	
 	ghost_data.reset()
 	var starting_ghosts = ghost_data.starting_ghosts
+	if OS.is_debug_build() and config.debug_force_ghosts.size() > 0:
+		starting_ghosts = config.debug_force_ghosts
+	
 	var all_ghosts = ghost_data.all_ghosts.duplicate(false)
 	for g in starting_ghosts:
 		all_ghosts.erase(g)
@@ -65,10 +71,12 @@ func on_lives_empty() -> void:
 	game_over.appear()
 
 func on_timer_timeout() -> void:
-	prog_data.update_time()
+	prog_data.update_time(Time.get_ticks_msec())
 
 func start_game() -> void:
-	tutorial.appear(starting_elements)
+	var skip_tutorial = OS.is_debug_build() and config.debug_skip_pregame
+	if not skip_tutorial:
+		tutorial.appear(starting_elements)
 	restart_unlock_timer()
 
 func _on_timer_unlock_timeout() -> void:
@@ -97,7 +105,7 @@ func unlock_glasses(tp:GlassesTypeData) -> void:
 	var threshold := config.prog_ghost_perc_to_adopt_new_glasses
 	for i in range(num_types):
 		# if there's just one ghost, we always want to adopt, otherwise the new glasses are useless now AND we can't "break into percentage" one thing anyway
-		var should_adopt := (i-randf()+1)/num_types <= threshold or num_types <= 1
+		var should_adopt := (i-randf()+1.0)/num_types <= threshold or num_types <= 1
 		var can_adopt : bool = types_unlocked[i].count_weaknesses() < config.ghosts_max_weaknesses
 		if should_adopt and can_adopt:
 			types_unlocked[i].add_weakness(tp) 
@@ -108,8 +116,8 @@ func unlock_ghost(tp:GhostTypeData) -> void:
 	var weak_glasses : Array[GlassesTypeData] = [glasses_data.elements.back()]
 	for i in range(glasses_data.elements.size()-1):
 		var should_include := randf() <= config.prog_include_old_weak_glasses_prob
-		if should_include:
-			weak_glasses.append(glasses_data.elements[i])
+		if not should_include: continue
+		weak_glasses.append(glasses_data.elements[i])
 	
 	tp.set_weaknesses(weak_glasses)
 	ghost_data.unlock_ghost_type(tp)

@@ -15,7 +15,7 @@ func set_data(d:GhostTypeData) -> void:
 	
 	stats.health.set_frame(get_frame_for_diff(d.health - 1.0))
 	stats.shield.set_frame(get_frame_for_diff(d.shield - 0.0))
-	stats.speed.set_frame(get_frame_for_diff(d.movement.speed - 1.0))
+	stats.speed.set_frame(get_frame_for_diff(d.speed - 1.0))
 	stats.damage.set_frame(get_frame_for_diff(d.lives_taken - 1))
 
 func get_frame_for_diff(diff:float) -> int:

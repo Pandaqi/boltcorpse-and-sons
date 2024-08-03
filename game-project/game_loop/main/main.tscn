@@ -5,7 +5,6 @@
 [ext_resource type="Script" path="res://game_loop/main/progression/progression.gd" id="2_refyh"]
 [ext_resource type="Script" path="res://map/map.gd" id="2_ykd0i"]
 [ext_resource type="PackedScene" uid="uid://dsuvq68miv6x8" path="res://ghosts/ghost.tscn" id="3_jyu2n"]
-[ext_resource type="Script" path="res://game_loop/main/progression/progression_data.gd" id="3_qqng1"]
 [ext_resource type="Script" path="res://map/spawner/spawner.gd" id="5_chqyf"]
 [ext_resource type="Resource" uid="uid://crb1nt4ffy00e" path="res://player/player_data.tres" id="6_6f3qk"]
 [ext_resource type="Resource" uid="uid://u6olkls3fh7k" path="res://game_loop/globals/config.tres" id="6_v3qas"]
@@ -20,6 +19,7 @@
 [ext_resource type="PackedScene" uid="uid://c8qgvdiwwqt1c" path="res://ui/glasses/glasses_sprite.tscn" id="13_hw63y"]
 [ext_resource type="PackedScene" uid="uid://bfnj7yvk0hwyk" path="res://ui/tutorial/tutorial_ghost.tscn" id="13_trmc1"]
 [ext_resource type="Script" path="res://ui/tutorial/tutorial.gd" id="13_y52ka"]
+[ext_resource type="Resource" uid="uid://mfgajlgamn7b" path="res://game_loop/main/progression/progression_data.tres" id="14_cg3ba"]
 [ext_resource type="PackedScene" uid="uid://cwp1ogr5nvk82" path="res://ui/tutorial/tutorial_glasses.tscn" id="15_k4nl8"]
 [ext_resource type="FontFile" uid="uid://c4b8314vpi2qp" path="res://ui/fonts/body_italic.ttf" id="15_nmds6"]
 [ext_resource type="FontFile" uid="uid://c8k2wnr8js0r2" path="res://ui/fonts/heading.ttf" id="16_hmwjp"]
@@ -28,9 +28,7 @@
 [ext_resource type="AudioStream" uid="uid://dw0fx81i13r68" path="res://player/flashlight_switch.ogg" id="22_4bn4i"]
 [ext_resource type="Texture2D" uid="uid://3r4qex0exhe8" path="res://ui/nine_patch_rect.tres" id="22_7psni"]
 [ext_resource type="FontFile" uid="uid://cncklelvw6sx3" path="res://ui/fonts/body_bold.ttf" id="24_u04i1"]
-
-[sub_resource type="Resource" id="Resource_3hy7l"]
-script = ExtResource("3_qqng1")
+[ext_resource type="AudioStream" uid="uid://bw5hdrx4e1iyx" path="res://game_loop/game_over.ogg" id="28_x4fam"]
 
 [sub_resource type="Animation" id="Animation_u84je"]
 length = 0.001
@@ -146,7 +144,7 @@ script = ExtResource("1_psqdd")
 
 [node name="Progression" type="Node" parent="."]
 script = ExtResource("2_refyh")
-prog_data = SubResource("Resource_3hy7l")
+prog_data = ExtResource("14_cg3ba")
 glasses_data = ExtResource("13_7mas8")
 ghost_data = ExtResource("9_esefb")
 config = ExtResource("6_v3qas")
@@ -187,8 +185,10 @@ ghost_scene = ExtResource("3_jyu2n")
 player_data = ExtResource("6_6f3qk")
 ghost_data = ExtResource("9_esefb")
 config = ExtResource("6_v3qas")
+prog_data = ExtResource("14_cg3ba")
 
 [node name="Timer" type="Timer" parent="Map/SpawnerGhosts"]
+one_shot = true
 
 [node name="UI" type="CanvasLayer" parent="."]
 script = ExtResource("9_rid4j")
@@ -364,6 +364,10 @@ grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("16_xyl3x")
 player_data = ExtResource("6_6f3qk")
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="UI/GameOver"]
+stream = ExtResource("28_x4fam")
+volume_db = -1.0
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="UI/GameOver"]
 libraries = {

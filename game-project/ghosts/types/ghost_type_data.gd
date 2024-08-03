@@ -7,10 +7,13 @@ class_name GhostTypeData extends Resource
 @export var weak_glasses : Array[GlassesTypeData] = []
 @export var health := 1.0
 @export var shield := 0.0
+@export var speed := 1.0 # this can be multiplied further by the specific movement data; it's more a "base speed multiplier"
 @export var movement : GhostMovementData
 @export var effects : Array = [] # @TODO: type-hint this once I have actual effects
 @export var self_light := true
 @export var value := 1.0 # modifies what score you get for killing them, and perhaps difficulty settings later
+
+@export var max_num := 3 # the maximum number of this type that can be in a level
 
 signal weaknesses_changed(new_weak:Array[GlassesTypeData])
 

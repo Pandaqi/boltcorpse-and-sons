@@ -4,7 +4,7 @@ var side_looking := 1
 var player : Player
 
 func on_viewed_side(ghost:Ghost) -> bool:
-	return ghost.position.x * side_looking > player.position.x * side_looking
+	return ghost.global_position.x * side_looking > player.global_position.x * side_looking
 
 func in_range(ghost:Ghost) -> bool:
 	return player.looker.ghost_is_in_range(ghost)

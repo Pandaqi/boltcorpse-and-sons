@@ -1,10 +1,8 @@
-[gd_resource type="Resource" script_class="GhostTypeData" load_steps=6 format=3 uid="uid://dunsu8wxxemwt"]
+[gd_resource type="Resource" script_class="GhostTypeData" load_steps=4 format=3 uid="uid://dunsu8wxxemwt"]
 
 [ext_resource type="Resource" uid="uid://dc4sx5sirmrut" path="res://ghosts/types_movement/float_simple.tres" id="1_uc22b"]
 [ext_resource type="Script" path="res://ghosts/types/ghost_type_data.gd" id="2_3pn55"]
 [ext_resource type="Script" path="res://player/glasses/types/glasses_type_data.gd" id="3_of4ys"]
-[ext_resource type="Resource" uid="uid://bcsj5jor77soy" path="res://player/glasses/types/glasses_circle.tres" id="4_o7ok0"]
-[ext_resource type="Resource" uid="uid://dnbl5jf6kg8f6" path="res://player/glasses/types/glasses_triangle.tres" id="5_a650w"]
 
 [resource]
 script = ExtResource("2_3pn55")
@@ -12,8 +10,10 @@ frame = 0
 desc = "Your regular friendly ghost doing nothing special."
 range_attack = 1.0
 lives_taken = 1
-weak_glasses = Array[ExtResource("3_of4ys")]([ExtResource("4_o7ok0"), ExtResource("5_a650w")])
+weak_glasses = Array[ExtResource("3_of4ys")]([])
 health = 1.0
 shield = 0.0
 movement = ExtResource("1_uc22b")
 effects = []
+self_light = true
+value = 1.0

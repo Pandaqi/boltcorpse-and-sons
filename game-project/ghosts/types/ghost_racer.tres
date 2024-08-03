@@ -1,0 +1,21 @@
+[gd_resource type="Resource" script_class="GhostTypeData" load_steps=4 format=3 uid="uid://dtybgtfckmcn6"]
+
+[ext_resource type="Resource" uid="uid://k6ywcrygd3kn" path="res://ghosts/types_movement/float_speed_up.tres" id="1_gqc15"]
+[ext_resource type="Script" path="res://ghosts/types/ghost_type_data.gd" id="1_x72d8"]
+[ext_resource type="Script" path="res://player/glasses/types/glasses_type_data.gd" id="2_km7oe"]
+
+[resource]
+script = ExtResource("1_x72d8")
+frame = 7
+desc = "Starts slow but speeds up over time."
+range_attack = 1.0
+lives_taken = 1
+weak_glasses = Array[ExtResource("2_km7oe")]([])
+health = 1.0
+shield = 0.0
+speed = 1.0
+movement = ExtResource("1_gqc15")
+effects = []
+self_light = true
+value = 1.0
+max_num = 9

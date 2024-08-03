@@ -11,9 +11,13 @@ config_version=5
 [application]
 
 config/name="Boltcorpse & Sons"
-run/main_scene="res://game_loop/main/main.tscn"
+run/main_scene="res://game_loop/menu/menu.tscn"
 config/features=PackedStringArray("4.3", "GL Compatibility")
 config/icon="res://icon.svg"
+
+[autoload]
+
+GSignalBus="*res://game_loop/globals/GSignalBus.gd"
 
 [display]
 
@@ -62,3 +66,4 @@ dismiss_tutorial={
 
 renderer/rendering_method="gl_compatibility"
 renderer/rendering_method.mobile="gl_compatibility"
+environment/defaults/default_clear_color=Color(0.00392157, 0.0352941, 0.105882, 1)

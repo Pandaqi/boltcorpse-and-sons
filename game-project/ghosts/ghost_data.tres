@@ -1,12 +1,21 @@
-[gd_resource type="Resource" script_class="GhostData" load_steps=5 format=3 uid="uid://7ndijft3aqws"]
+[gd_resource type="Resource" script_class="GhostData" load_steps=14 format=3 uid="uid://7ndijft3aqws"]
 
 [ext_resource type="Script" path="res://ghosts/types/ghost_type_data.gd" id="1_25ico"]
 [ext_resource type="Script" path="res://ghosts/ghost_data.gd" id="1_fxnyv"]
 [ext_resource type="Resource" uid="uid://dunsu8wxxemwt" path="res://ghosts/types/ghost_regular.tres" id="2_y6q67"]
+[ext_resource type="Resource" uid="uid://dddv2tr5c6swd" path="res://ghosts/types/ghost_angel.tres" id="3_1no00"]
 [ext_resource type="Resource" uid="uid://crb1nt4ffy00e" path="res://player/player_data.tres" id="3_aem8q"]
+[ext_resource type="Resource" uid="uid://77ktwftriwoq" path="res://ghosts/types/ghost_dancer.tres" id="4_t3ycl"]
+[ext_resource type="Resource" uid="uid://dr0o17qidm1or" path="res://ghosts/types/ghost_einzelganger.tres" id="5_64d7g"]
+[ext_resource type="Resource" uid="uid://dd4m4f5cwrxg3" path="res://ghosts/types/ghost_jumper.tres" id="6_fn134"]
+[ext_resource type="Resource" uid="uid://dpwvdu6h86qrm" path="res://ghosts/types/ghost_monster.tres" id="7_xhfxj"]
+[ext_resource type="Resource" uid="uid://dtybgtfckmcn6" path="res://ghosts/types/ghost_racer.tres" id="8_a6y55"]
+[ext_resource type="Resource" uid="uid://cnd0ywd0cb56d" path="res://ghosts/types/ghost_sleepwalker.tres" id="9_wb3et"]
+[ext_resource type="Resource" uid="uid://c4f6slxtp5mqo" path="res://ghosts/types/ghost_speedy.tres" id="10_f1syq"]
+[ext_resource type="Resource" uid="uid://bwulub71s73bm" path="res://ghosts/types/ghost_turtle.tres" id="11_jqtl6"]
 
 [resource]
 script = ExtResource("1_fxnyv")
-all_ghosts = Array[ExtResource("1_25ico")]([ExtResource("2_y6q67")])
+all_ghosts = Array[ExtResource("1_25ico")]([ExtResource("2_y6q67"), ExtResource("3_1no00"), ExtResource("4_t3ycl"), ExtResource("5_64d7g"), ExtResource("6_fn134"), ExtResource("7_xhfxj"), ExtResource("8_a6y55"), ExtResource("9_wb3et"), ExtResource("10_f1syq"), ExtResource("11_jqtl6")])
 starting_ghosts = Array[ExtResource("1_25ico")]([ExtResource("2_y6q67")])
 player_data = ExtResource("3_aem8q")

@@ -32,6 +32,8 @@ func on_resize() -> void:
 	tut_glasses.set_position(0.5*vp_size)
 
 func appear(elements:Array) -> void:
+	if OS.is_debug_build() and config.debug_skip_tutorials: return
+	
 	for elem in elements:
 		appear_single(elem)
 		await self.dismissed

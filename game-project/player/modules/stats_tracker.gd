@@ -21,8 +21,9 @@ func killed_ghost(g:Ghost):
 	extra_score *= 1.0 + prog_data.get_ratio()
 	
 	# and a bonus for killing them earlier
-	var dist_to_player : float = 1.0 + clamp(entity.position.distance_to(g.position) / config.glasses_def_range_see, 0.0, 1.0)
-	
+	var dist_to_player : float = entity.position.distance_to(g.position) / config.glasses_def_range_see
+	extra_score *= 1.0 + clamp(dist_to_player, 0.0, 1.0)
+
 	update_score(extra_score)
 
 func on_something_unlocked() -> void:

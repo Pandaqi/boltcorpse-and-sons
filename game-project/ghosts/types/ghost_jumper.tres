@@ -1,0 +1,20 @@
+[gd_resource type="Resource" script_class="GhostTypeData" load_steps=4 format=3 uid="uid://dd4m4f5cwrxg3"]
+
+[ext_resource type="Script" path="res://ghosts/types/ghost_type_data.gd" id="1_onk7b"]
+[ext_resource type="Resource" uid="uid://enqisrlavshc" path="res://ghosts/types_movement/movement_jumper.tres" id="1_xww2a"]
+[ext_resource type="Script" path="res://player/glasses/types/glasses_type_data.gd" id="2_ty2fu"]
+
+[resource]
+script = ExtResource("1_onk7b")
+frame = 3
+desc = "Sits still for a while, then suddenly leaps forward. Rinse and repeat."
+range_attack = 1.0
+lives_taken = 1
+weak_glasses = Array[ExtResource("2_ty2fu")]([])
+health = 1.0
+shield = 0.0
+speed = 1.33
+movement = ExtResource("1_xww2a")
+effects = []
+self_light = true
+value = 1.0

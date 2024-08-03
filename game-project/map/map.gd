@@ -1,6 +1,7 @@
 class_name Map extends Node2D
 
 @onready var spawner : SpawnerGhosts = $SpawnerGhosts
+@onready var canvas_modulate : CanvasModulate = $CanvasModulate
 @onready var bg : Sprite2D = $BG
 
 func activate() -> void:

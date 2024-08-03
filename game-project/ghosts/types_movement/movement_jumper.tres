@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="MovementVaried" load_steps=2 format=3 uid="uid://enqisrlavshc"]
+
+[ext_resource type="Script" path="res://ghosts/types_movement/movement_varied.gd" id="1_buvjq"]
+
+[resource]
+script = ExtResource("1_buvjq")
+timer_duration_min = 1.0
+timer_duration_max = 5.0
+flip_on_timeout = false
+only_move_on_timeout = true
+speed = 1.0
