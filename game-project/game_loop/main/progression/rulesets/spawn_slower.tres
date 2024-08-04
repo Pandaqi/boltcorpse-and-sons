@@ -8,6 +8,7 @@ desc = "New ghosts spawn 20% less quickly."
 speed_change = 1.0
 damage_change = 1.0
 health_change = 1.0
+shield_change = 1.0
 spawn_bounds_change = 1.0
 spawn_speed_change = 0.8
 sight_radius_change = 1.0

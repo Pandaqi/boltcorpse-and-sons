@@ -30,16 +30,20 @@ func on_timer_timeout() -> void:
 func check_ghost_spawn_numbers(from_tick := false) -> void:
 	var num_ghosts := ghost_data.count()
 	var global_change := prog_data.rules_data.spawn_bounds_change
-	var max_num := prog_data.interpolate(config.spawn_bounds_max) * global_change
+	var max_num : int = round(prog_data.interpolate(config.spawn_bounds_max) * global_change)
 	if num_ghosts >= max_num: return
 	
-	var min_num := prog_data.interpolate(config.spawn_bounds_min) * global_change
+	var min_num : int = round(prog_data.interpolate(config.spawn_bounds_min) * global_change)
 	while num_ghosts < min_num:
 		spawn_ghost()
 		num_ghosts += 1
 	
 	if from_tick:
-		spawn_ghost()
+		var too_far_below_maximum := true
+		while too_far_below_maximum:
+			spawn_ghost()
+			num_ghosts += 1
+			too_far_below_maximum = num_ghosts < 0.5*max_num
 
 func spawn_ghost() -> void:
 	print("SPAWNING GHOST")

@@ -6,6 +6,6 @@
 script = ExtResource("1_h6csj")
 only_when_looking = false
 speed_scale_start = 2.1
-speed_scale_end = 0.4
+speed_scale_end = 0.65
 speed_scale_max_dist = 3000
 speed = 1.0

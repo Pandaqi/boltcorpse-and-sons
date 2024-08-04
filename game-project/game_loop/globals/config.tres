@@ -1,56 +1,59 @@
-[gd_resource type="Resource" script_class="Config" load_steps=6 format=3 uid="uid://u6olkls3fh7k"]
+[gd_resource type="Resource" script_class="Config" load_steps=4 format=3 uid="uid://u6olkls3fh7k"]
 
 [ext_resource type="Script" path="res://ghosts/types/ghost_type_data.gd" id="1_7yaa3"]
 [ext_resource type="Script" path="res://game_loop/globals/config.gd" id="1_wu4df"]
-[ext_resource type="Resource" uid="uid://dr0o17qidm1or" path="res://ghosts/types/ghost_einzelganger.tres" id="2_wibcx"]
 [ext_resource type="Script" path="res://player/glasses/types/glasses_type_data.gd" id="3_vyvbn"]
-[ext_resource type="Resource" uid="uid://dunsu8wxxemwt" path="res://ghosts/types/ghost_regular.tres" id="3_yriy4"]
 
 [resource]
 script = ExtResource("1_wu4df")
 debug_skip_pregame = true
 debug_skip_tutorials = false
 debug_force_glasses = Array[ExtResource("3_vyvbn")]([])
-debug_force_ghosts = Array[ExtResource("1_7yaa3")]([ExtResource("2_wibcx"), ExtResource("3_yriy4")])
+debug_force_ghosts = Array[ExtResource("1_7yaa3")]([])
 debug_no_darkness = false
 debug_no_damage = false
-camera_min_multiple_of_def_range_see = 2.5
+camera_min_multiple_of_def_range_see = 2.75
 display_sight_radius = true
 display_kill_radius = true
 staying_in_view_changes_sight_radius = true
-staying_in_view_changed_kill_radius = true
-sight_radius_change_in_view = 128.0
-kill_radius_change_in_view = 128.0
-glasses_def_range_kill = 1792.0
-glasses_def_range_see = 2432.0
-glasses_def_damage = 30.0
-ghosts_def_health = 100.0
-ghosts_def_shield = 20.0
-ghosts_def_range_attack = 128.0
-ghosts_def_speed = 120.0
+staying_in_view_changes_kill_radius = true
+staying_in_view_changes_damage = true
+sight_radius_change_in_view = 92.0
+kill_radius_change_in_view = 64.0
+damage_change_in_view = 60.0
+glasses_def_range_see = 2176.0
+glasses_def_range_kill = 1408.0
+glasses_def_damage = 333.0
+ghosts_def_health = 1000.0
+ghosts_def_shield = 200.0
+ghosts_def_range_attack = 256.0
+ghosts_def_speed = 135.0
 ghosts_max_weaknesses = 3
 prog_max_time = 480.0
-prog_interval_between_unlocks = 15.0
+prog_interval_between_unlocks = 10.0
 prog_interval_added_per_unlock = 15.0
-prog_interval_max = 120
-prog_glasses_unlock_first = true
-prog_include_old_weak_glasses_prob = 0.5
-prog_ghost_perc_to_adopt_new_glasses = 0.5
+prog_interval_max = 60.0
+prog_include_old_weak_glasses_prob = 0.1
+prog_ghost_perc_to_adopt_new_glasses = 0.25
 prog_starting_hints_fade_delay = 4.0
-min_spawn_dist_to_player = 1536.0
+prog_glasses_unlock_first = true
+prog_cycle_between_glasses = 3
+prog_scale_automatically = false
+min_spawn_dist_to_player = 2048.0
 spawn_bounds_min = {
-"max": 4.0,
+"max": 6.0,
 "min": 1.0
 }
 spawn_bounds_max = {
-"max": 20.0,
-"min": 3.0
+"max": 12.0,
+"min": 4.0
 }
 spawn_interval_bounds = {
-"max": 5.0,
-"min": 2.0
+"max": 3.8,
+"min": 1.5
 }
 score_def_per_unlock = 100.0
 score_def_per_ghost_killed = 10.0
 lives_starting_num = 3
 lives_max = 9
+spirit_help_provide_on_life_lost = true

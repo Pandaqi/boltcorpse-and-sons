@@ -8,6 +8,7 @@ desc = "Your kill radius shrinks by 20%, but you do 20% more damage."
 speed_change = 1.0
 damage_change = 1.2
 health_change = 1.0
+shield_change = 1.0
 spawn_bounds_change = 1.0
 spawn_speed_change = 1.0
 sight_radius_change = 1.0

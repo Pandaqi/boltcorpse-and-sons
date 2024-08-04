@@ -8,6 +8,7 @@ desc = "Ghosts have 15% less health."
 speed_change = 1.0
 damage_change = 1.0
 health_change = 0.85
+shield_change = 1.0
 spawn_bounds_change = 1.0
 spawn_speed_change = 1.0
 sight_radius_change = 1.0

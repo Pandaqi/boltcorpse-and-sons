@@ -45,10 +45,14 @@ You only see one side of the game at a time. Ghosts spawn on either side.
 * Probably just by _seeing them_ for long enough, to neatly re-use the same mechanics everywhere. => **This is actually really promising, but I don't have time to put it into the game now.**
 * (Or have one-time goggles that, when selected, will instantly trigger whatever they do and then disappear from your inventory.)
 
-
 POSSIBLE TWEAKS:
-* The starting glasses are pretty powerful now. Slightly reduce their range of kill (and maybe sight)?
 * When determining ghost and glasses order, don't be completely random. Leave those with a higher value ( = harder) for _later_? (Should work, but I haven't actually assigned values to glasses and ghosts currently.)
+* _Slightly_ faster introduction of new elements at start?
+* Keep the HEALTH BAR visible through the shadow? (So you know if your attack is doing anything against them?)
+
+GLASSES IDEAS:
+* One that only works on a _single_ (or "max num") of ghosts at a time
+* One that completely freezes/stops all ghosts that are NOT weak to it.
 
 MORE SPIRIT HELP OPTIONS:
 * Get an extra life

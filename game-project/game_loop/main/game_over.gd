@@ -42,7 +42,7 @@ func _input(ev:InputEvent) -> void:
 
 func _on_back_pressed() -> void:
 	get_tree().paused = false
-	get_tree().change_scene_to_packed(preload("res://game_loop/menu/menu.tscn"))
+	get_tree().change_scene_to_file("res://game_loop/menu/menu.tscn")
 
 func _on_continue_pressed() -> void:
 	get_tree().paused = false

@@ -16,6 +16,9 @@ func fit_bounds_in_view(dt:float):
 	
 	# We only care about WIDTH => it should be precisely large enough that our default sight range covers ~2/3 of the screen
 	var required_width := config.camera_min_multiple_of_def_range_see * config.glasses_def_range_see
+	print(config.camera_min_multiple_of_def_range_see)
+	print(config.glasses_def_range_see)
+	print(required_width)
 	var target_position := player_data.player.get_position()
 	
 	var vp_size := get_viewport_rect().size
