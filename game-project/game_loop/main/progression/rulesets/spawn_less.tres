@@ -1,0 +1,15 @@
+[gd_resource type="Resource" script_class="ProgressionRulesData" load_steps=2 format=3 uid="uid://dl81abxoq1sc0"]
+
+[ext_resource type="Script" path="res://game_loop/main/progression/rulesets/progression_rules_data.gd" id="1_k5iw7"]
+
+[resource]
+script = ExtResource("1_k5iw7")
+desc = "A 15% reduction in the maximum number of ghosts that spawn."
+speed_change = 1.0
+damage_change = 1.0
+health_change = 1.0
+spawn_bounds_change = 0.85
+spawn_speed_change = 1.0
+sight_radius_change = 1.0
+kill_radius_change = 1.0
+lives_bonus = 0.0

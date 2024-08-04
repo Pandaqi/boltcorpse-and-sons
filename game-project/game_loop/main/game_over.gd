@@ -6,12 +6,17 @@ class_name GameOver extends Control
 @onready var audio_player : AudioStreamPlayer = $AudioStreamPlayer
 
 var active := false
+var game_done := false
 
-func activate():
+func activate() -> void:
 	active = false
 	set_visible(false)
 
+func is_game_over() -> bool:
+	return game_done
+
 func appear() -> void:
+	game_done = true
 	audio_player.play()
 	
 	# QOL: to let sound effects and animations play out

@@ -1,5 +1,7 @@
 extends Node
 
+signal spirit_help()
+
 func _ready():
 	var a = AudioStreamPlayer.new()
 	a.stream = preload("res://game_loop/background_ambience.ogg")

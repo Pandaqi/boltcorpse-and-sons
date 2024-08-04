@@ -1,0 +1,6 @@
+[gd_resource type="Resource" script_class="ProgressionRulesData" load_steps=2 format=3 uid="uid://dnon2vwcuo5vl"]
+
+[ext_resource type="Script" path="res://game_loop/main/progression/rulesets/progression_rules_data.gd" id="1_snog6"]
+
+[resource]
+script = ExtResource("1_snog6")

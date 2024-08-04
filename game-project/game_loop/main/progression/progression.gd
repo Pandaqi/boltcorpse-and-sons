@@ -7,6 +7,7 @@ class_name Progression extends Node
 
 @onready var timer_unlock : Timer = $TimerUnlock
 
+var rules_data : ProgressionRulesData
 var game_over : GameOver
 var is_done := false
 var starting_elements := []
@@ -19,7 +20,7 @@ var unlock_interval : = 0.0
 func activate(p:Player, go:GameOver, t:Tutorial) -> void:
 	game_over = go
 	tutorial = t
-	prog_data.reset(Time.get_ticks_msec(), config.prog_max_time)
+	prog_data.reset(config.prog_scale_automatically, Time.get_ticks_msec(), config.prog_max_time)
 	p.lives.empty.connect(on_lives_empty)
 	
 	unlock_interval = config.prog_interval_between_unlocks
@@ -54,12 +55,16 @@ func generate_unlock_order() -> void:
 	
 	# pick from both lists, alternating, until both depleted
 	var arr = []
-	var pick_glasses := config.prog_glasses_unlock_first
+	var cycle_between_glasses := config.prog_cycle_between_glasses
+	var last_glasses_time := randi_range(0, cycle_between_glasses)
+	if config.prog_glasses_unlock_first:
+		last_glasses_time = 0
+	
 	while all_glasses.size() + all_ghosts.size() > 0:
-		var pick_ghost : bool = ((not pick_glasses) or all_glasses.size() <= 0) and all_ghosts.size() > 0
+		var pick_ghost = (last_glasses_time != 0 and all_ghosts.size() > 0) or all_glasses.size() <= 0
 		if pick_ghost: arr.append(all_ghosts.pop_back())
 		else: arr.append(all_glasses.pop_back())
-		pick_glasses = not pick_glasses
+		last_glasses_time = (last_glasses_time + 1) % cycle_between_glasses
 	
 	element_order = arr
 

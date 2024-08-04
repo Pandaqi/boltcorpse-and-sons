@@ -1,0 +1,15 @@
+[gd_resource type="Resource" script_class="ProgressionRulesData" load_steps=2 format=3 uid="uid://b1kty2f6dhfpu"]
+
+[ext_resource type="Script" path="res://game_loop/main/progression/rulesets/progression_rules_data.gd" id="1_5q3jo"]
+
+[resource]
+script = ExtResource("1_5q3jo")
+desc = "Ghosts have 15% less health."
+speed_change = 1.0
+damage_change = 1.0
+health_change = 0.85
+spawn_bounds_change = 1.0
+spawn_speed_change = 1.0
+sight_radius_change = 1.0
+kill_radius_change = 1.0
+lives_bonus = 0.0

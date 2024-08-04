@@ -8,7 +8,9 @@ class_name Ghost extends Node2D
 @onready var audio_player : AudioStreamPlayer2D = $AudioAppear
 @onready var audio_death : AudioStreamPlayer2D = $AudioDeath
 @onready var light : ModuleLight = $Light
+
 @export var config : Config
+@export var prog_data : ProgressionData
 
 var type : GhostTypeData
 var dead := false
@@ -27,7 +29,9 @@ func set_type(t:GhostTypeData) -> void:
 	
 	sprite.set_frame(type.frame)
 	
-	health.set_base_health(type.health * config.ghosts_def_health)
+	# @TODO: now the health doesn't dynamically update on rules change; but that's fine?
+	var final_health := type.health * config.ghosts_def_health * prog_data.rules_data.health_change
+	health.set_base_health(final_health)
 	health.refill()
 	
 	mover.set_resource(type.movement)

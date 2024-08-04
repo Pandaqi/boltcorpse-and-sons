@@ -1,0 +1,15 @@
+[gd_resource type="Resource" script_class="ProgressionRulesData" load_steps=2 format=3 uid="uid://bdq61ssjtrg6e"]
+
+[ext_resource type="Script" path="res://game_loop/main/progression/rulesets/progression_rules_data.gd" id="1_p4sfd"]
+
+[resource]
+script = ExtResource("1_p4sfd")
+desc = "Your kill radius shrinks by 20%, but you do 20% more damage."
+speed_change = 1.0
+damage_change = 1.2
+health_change = 1.0
+spawn_bounds_change = 1.0
+spawn_speed_change = 1.0
+sight_radius_change = 1.0
+kill_radius_change = 0.8
+lives_bonus = 0.0

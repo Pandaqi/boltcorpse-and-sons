@@ -1,8 +1,23 @@
-[gd_resource type="Resource" script_class="ProgressionData" load_steps=3 format=3 uid="uid://mfgajlgamn7b"]
+[gd_resource type="Resource" script_class="ProgressionData" load_steps=16 format=3 uid="uid://mfgajlgamn7b"]
 
-[ext_resource type="Resource" uid="uid://u6olkls3fh7k" path="res://game_loop/globals/config.tres" id="1_61k1m"]
+[ext_resource type="Script" path="res://game_loop/main/progression/rulesets/progression_rules_data.gd" id="1_l24as"]
+[ext_resource type="Resource" uid="uid://d1i7xqs2hp6v4" path="res://game_loop/main/progression/rulesets/auto_scale_rules.tres" id="1_q6ije"]
 [ext_resource type="Script" path="res://game_loop/main/progression/progression_data.gd" id="1_s0yd2"]
+[ext_resource type="Resource" uid="uid://dnon2vwcuo5vl" path="res://game_loop/main/progression/rulesets/default_rules.tres" id="2_h53o5"]
+[ext_resource type="Resource" uid="uid://yuqthr2tv04s" path="res://game_loop/main/progression/rulesets/ghosts_slower.tres" id="2_m4xmq"]
+[ext_resource type="Resource" uid="uid://b8loyoc2av37g" path="res://game_loop/main/progression/rulesets/faster_but_less_health.tres" id="3_44qu7"]
+[ext_resource type="Resource" uid="uid://dl1ao70t7pedq" path="res://game_loop/main/progression/rulesets/damage_higher.tres" id="3_v0ns8"]
+[ext_resource type="Resource" uid="uid://b1kty2f6dhfpu" path="res://game_loop/main/progression/rulesets/health_less.tres" id="5_x53h5"]
+[ext_resource type="Resource" uid="uid://cc0iu8y2iiotq" path="res://game_loop/main/progression/rulesets/kill_range_increase.tres" id="6_nffis"]
+[ext_resource type="Resource" uid="uid://bdq61ssjtrg6e" path="res://game_loop/main/progression/rulesets/kill_shrink_damage_up.tres" id="7_4pjev"]
+[ext_resource type="Resource" uid="uid://ug2vj0hiqkbt" path="res://game_loop/main/progression/rulesets/shield_down.tres" id="8_lexah"]
+[ext_resource type="Resource" uid="uid://b6lb614fksjg1" path="res://game_loop/main/progression/rulesets/sight_range_increase.tres" id="9_nkjtb"]
+[ext_resource type="Resource" uid="uid://b6fof1ofihpkx" path="res://game_loop/main/progression/rulesets/sight_shrink_all_up.tres" id="10_aq1ht"]
+[ext_resource type="Resource" uid="uid://dl81abxoq1sc0" path="res://game_loop/main/progression/rulesets/spawn_less.tres" id="11_pd4uj"]
+[ext_resource type="Resource" uid="uid://c1ovxau6j4u15" path="res://game_loop/main/progression/rulesets/spawn_slower.tres" id="12_bfrs2"]
 
 [resource]
 script = ExtResource("1_s0yd2")
-config = ExtResource("1_61k1m")
+all_rulesets = Array[ExtResource("1_l24as")]([ExtResource("3_v0ns8"), ExtResource("3_44qu7"), ExtResource("2_m4xmq"), ExtResource("5_x53h5"), ExtResource("6_nffis"), ExtResource("7_4pjev"), ExtResource("8_lexah"), ExtResource("9_nkjtb"), ExtResource("10_aq1ht"), ExtResource("11_pd4uj"), ExtResource("12_bfrs2")])
+default_rules = ExtResource("2_h53o5")
+auto_scale_rules = ExtResource("1_q6ije")

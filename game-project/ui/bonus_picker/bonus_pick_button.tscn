@@ -1,0 +1,46 @@
+[gd_scene load_steps=5 format=3 uid="uid://diq640dlhwq4j"]
+
+[ext_resource type="Script" path="res://ui/bonus_picker/bonus_pick_button.gd" id="1_7vwf5"]
+[ext_resource type="Theme" uid="uid://jnbucre5g4fs" path="res://ui/default_theme.tres" id="2_6ywjv"]
+[ext_resource type="Texture2D" uid="uid://bs3wojv1b77ln" path="res://game_loop/misc.webp" id="3_fh68b"]
+[ext_resource type="FontFile" uid="uid://c4b8314vpi2qp" path="res://ui/fonts/body_italic.ttf" id="4_6e20d"]
+
+[node name="BonusPickButton" type="Node2D"]
+position = Vector2(-224, 139)
+script = ExtResource("1_7vwf5")
+
+[node name="Button" type="Button" parent="."]
+custom_minimum_size = Vector2(256, 256)
+offset_left = -198.0
+offset_top = -128.0
+offset_right = 213.0
+offset_bottom = 128.0
+theme = ExtResource("2_6ywjv")
+theme_override_font_sizes/font_size = 36
+text = "This is placeholder text lalalie"
+autowrap_mode = 3
+
+[node name="GlassesSprite" type="Node2D" parent="."]
+position = Vector2(0, 128)
+
+[node name="BG" type="Sprite2D" parent="GlassesSprite"]
+scale = Vector2(0.166, 0.166)
+texture = ExtResource("3_fh68b")
+hframes = 4
+vframes = 4
+frame = 2
+
+[node name="Label" type="Label" parent="GlassesSprite"]
+offset_left = -78.0
+offset_top = -81.0
+offset_right = 74.0
+offset_bottom = 79.0
+theme = ExtResource("2_6ywjv")
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("4_6e20d")
+theme_override_font_sizes/font_size = 64
+text = "<"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[connection signal="pressed" from="Button" to="." method="_on_button_pressed"]

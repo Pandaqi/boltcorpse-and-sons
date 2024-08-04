@@ -11,26 +11,33 @@ class_name Config extends Resource
 @export var debug_no_damage := false
 
 #
-# MAP/CAMERA
+# MAP/CAMERA / SIGHT+KILL RADII
 #
+@export var camera_min_multiple_of_def_range_see := 2.5 # this defines how far we must be able to see horizontally, which fixes camera scaling regardless of screen size
+
 @export var display_sight_radius := true
 @export var display_kill_radius := true
-@export var camera_min_multiple_of_def_range_see := 2.5
+@export var staying_in_view_changes_sight_radius := true
+@export var staying_in_view_changes_kill_radius := true
+@export var staying_in_view_changes_damage := true
+@export var sight_radius_change_in_view := 16.0 # this is per second; multiplied by dt
+@export var kill_radius_change_in_view := 12.0
+@export var damage_change_in_view := 350.0/20.0 # idea behind this = after X seconds, it has doubled => make it LOWER than you think, because it progressively grows as a ghost is in sight
 
 #
 # GLASSES
 #
 @export var glasses_def_range_kill := 512*3.25
 @export var glasses_def_range_see := 512*3.75
-@export var glasses_def_damage := 350.0
+@export var glasses_def_damage := 325.0
 
 #
 # GHOSTS
 #
-@export var ghosts_def_health := 1000.0
+@export var ghosts_def_health := 1000.0 # @NOTE: if we use low numbers (1/10/100) we might get floating point errors on really small amounts of damage
 @export var ghosts_def_shield := 200.0
-@export var ghosts_def_range_attack := 128.0
-@export var ghosts_def_speed := 120.0
+@export var ghosts_def_range_attack := 256.0
+@export var ghosts_def_speed := 135.0
 @export var ghosts_max_weaknesses := 3
 
 #
@@ -40,17 +47,23 @@ class_name Config extends Resource
 
 @export var prog_interval_between_unlocks := 10.0 # this is just the first interval, it ramps up from there
 @export var prog_interval_added_per_unlock := 15.0
-@export var prog_interval_max := 120
-@export var prog_glasses_unlock_first := true # true = the best thing to do for gameplay
-@export var prog_include_old_weak_glasses_prob := 0.5 # the probability that ghosts are sensitive for an earlier introduced glass
-@export var prog_ghost_perc_to_adopt_new_glasses := 0.5 # the probability that, when new glasses arrive, old ghosts adopt those too
+@export var prog_interval_max := 60.0
+
+@export var prog_include_old_weak_glasses_prob := 0.35 # the probability that ghosts are sensitive for an earlier introduced glass
+@export var prog_ghost_perc_to_adopt_new_glasses := 0.575 # the probability that, when new glasses arrive, old ghosts adopt those too
 
 @export var prog_starting_hints_fade_delay := 4.0
+
+@export var prog_glasses_unlock_first := true # true = the best thing to do for gameplay
+@export var prog_cycle_between_glasses := 2  # after every X ghosts, reveal another glasses
+
+@export var prog_scale_automatically := false
+
 
 #
 # SPAWNING
 #
-@export var min_spawn_dist_to_player := 512*3.0
+@export var min_spawn_dist_to_player := 512*4.0
 @export var spawn_bounds_min := { "min": 1.0, "max": 4.0 } # lerped by progression ratio
 @export var spawn_bounds_max := { "min": 3.0, "max": 20.0 } # lerped by progression ratio
 
@@ -69,3 +82,4 @@ class_name Config extends Resource
 #
 @export var lives_starting_num := 3
 @export var lives_max := 9
+@export var spirit_help_provide_on_life_lost := true

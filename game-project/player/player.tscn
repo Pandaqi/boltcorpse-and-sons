@@ -214,6 +214,7 @@ script = ExtResource("5_0qvwt")
 player_data = ExtResource("2_13tto")
 ghost_data = ExtResource("6_nqwpf")
 glasses_data = ExtResource("8_y2lou")
+prog_data = ExtResource("18_iiviq")
 config = ExtResource("8_cv405")
 
 [node name="Flashlight" type="Node2D" parent="Looker"]
@@ -279,6 +280,7 @@ config = ExtResource("8_cv405")
 script = ExtResource("11_ysm6p")
 ghost_data = ExtResource("6_nqwpf")
 glasses_data = ExtResource("8_y2lou")
+prog_data = ExtResource("18_iiviq")
 config = ExtResource("8_cv405")
 
 [node name="KillRadiusContainer" type="Node2D" parent="GhostKiller"]

@@ -9,6 +9,9 @@ class_name Tutorial extends Node2D
 @export var modal_scale := 0.5
 @export var config : Config
 @onready var audio_player : AudioStreamPlayer = $AudioStreamPlayer
+@onready var bonus_picker = $BonusPicker
+
+var game_over : GameOver
 
 var active := false
 var active_node = null
@@ -16,12 +19,21 @@ var first_show := true
 
 signal dismissed()
 
-func activate() -> void:
+func activate(go:GameOver) -> void:
+	game_over = go
+	
 	tut_ghost.set_visible(false)
 	tut_glasses.set_visible(false)
+	bonus_picker.set_visible(false)
 	active = false
 	
 	starting_hints.set_visible(false)
+	
+	GSignalBus.spirit_help.connect(on_spirit_help)
+
+# @TODO: triggering this based on some magic STRING is BAD, but no time for better architecture now
+func on_spirit_help() -> void:
+	appear(["spirit_help"])
 
 func on_resize() -> void:
 	var vp_size = get_viewport_rect().size
@@ -30,8 +42,10 @@ func on_resize() -> void:
 	
 	tut_ghost.set_position(0.5*vp_size)
 	tut_glasses.set_position(0.5*vp_size)
+	bonus_picker.set_position(0.5*vp_size)
 
 func appear(elements:Array) -> void:
+	if game_over.is_game_over(): return
 	if OS.is_debug_build() and config.debug_skip_tutorials: return
 	
 	for elem in elements:
@@ -45,7 +59,11 @@ func appear(elements:Array) -> void:
 func appear_single(element) -> void:
 	get_tree().paused = true
 	
-	var node = tut_glasses if (element is GlassesTypeData) else tut_ghost
+	var node = null
+	if (element is GlassesTypeData): node = tut_glasses
+	elif (element is GhostTypeData): node = tut_ghost
+	elif element == "spirit_help": node = bonus_picker
+	
 	node.set_scale(Vector2.ZERO)
 	node.set_visible(true)
 	node.modulate.a = 0.0

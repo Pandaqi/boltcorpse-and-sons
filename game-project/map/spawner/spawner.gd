@@ -17,10 +17,10 @@ func activate() -> void:
 		get_parent().canvas_modulate.set_visible(false)
 
 func restart_timer() -> void:
-	timer.wait_time = prog_data.interpolate(config.spawn_interval_bounds)
+	timer.wait_time = prog_data.interpolate(config.spawn_interval_bounds) * prog_data.rules_data.spawn_speed_change
 	timer.start()
 
-func on_ghost_removed(g:Ghost) -> void:
+func on_ghost_removed(_g:Ghost) -> void:
 	check_ghost_spawn_numbers()
 
 func on_timer_timeout() -> void:
@@ -28,12 +28,12 @@ func on_timer_timeout() -> void:
 	restart_timer()
 
 func check_ghost_spawn_numbers(from_tick := false) -> void:
-	print("PROG RATIO", prog_data.get_ratio())
 	var num_ghosts := ghost_data.count()
-	var max_num := prog_data.interpolate(config.spawn_bounds_max)
+	var global_change := prog_data.rules_data.spawn_bounds_change
+	var max_num := prog_data.interpolate(config.spawn_bounds_max) * global_change
 	if num_ghosts >= max_num: return
 	
-	var min_num := prog_data.interpolate(config.spawn_bounds_min)
+	var min_num := prog_data.interpolate(config.spawn_bounds_min) * global_change
 	while num_ghosts < min_num:
 		spawn_ghost()
 		num_ghosts += 1

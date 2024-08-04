@@ -1,0 +1,16 @@
+[gd_resource type="Resource" script_class="ProgressionRulesData" load_steps=2 format=3 uid="uid://d1i7xqs2hp6v4"]
+
+[ext_resource type="Script" path="res://game_loop/main/progression/rulesets/progression_rules_data.gd" id="1_p7d3f"]
+
+[resource]
+script = ExtResource("1_p7d3f")
+desc = "If AutoScale is on in progression, these are the final numbers it should end up on."
+speed_change = 0.85
+damage_change = 1.5
+health_change = 0.9
+shield_change = 0.9
+spawn_bounds_change = 1.0
+spawn_speed_change = 1.0
+sight_radius_change = 1.33
+kill_radius_change = 1.33
+lives_bonus = 0.0

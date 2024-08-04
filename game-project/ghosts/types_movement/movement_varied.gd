@@ -37,7 +37,7 @@ func _process(dt:float, g:Ghost) -> void:
 	var cur_speed := dir * speed
 	
 	if only_move_on_timeout:
-		dt = time_elapsed if timed_out else 0
+		dt = time_elapsed if timed_out else 0.0
 	
 	move_straight(dt, g, cur_speed)
 	

@@ -23,6 +23,10 @@ func change_lives(dl:int) -> void:
 	
 	if lives <= 0:
 		empty.emit()
+	
+	if config.spirit_help_provide_on_life_lost:
+		await audio_player.finished
+		GSignalBus.spirit_help.emit()
 
 func show_particles() -> void:
 	particles.set_emitting(true)

@@ -1,4 +1,4 @@
-[gd_scene load_steps=33 format=3 uid="uid://dwq6ly1p8qy12"]
+[gd_scene load_steps=36 format=3 uid="uid://dwq6ly1p8qy12"]
 
 [ext_resource type="Script" path="res://game_loop/main/main.gd" id="1_psqdd"]
 [ext_resource type="Script" path="res://game_loop/main/camera.gd" id="2_k0pq2"]
@@ -28,7 +28,10 @@
 [ext_resource type="AudioStream" uid="uid://dw0fx81i13r68" path="res://player/flashlight_switch.ogg" id="22_4bn4i"]
 [ext_resource type="Texture2D" uid="uid://3r4qex0exhe8" path="res://ui/nine_patch_rect.tres" id="22_7psni"]
 [ext_resource type="FontFile" uid="uid://cncklelvw6sx3" path="res://ui/fonts/body_bold.ttf" id="24_u04i1"]
+[ext_resource type="Script" path="res://ui/bonus_picker/bonus_picker.gd" id="27_7sqbh"]
+[ext_resource type="Texture2D" uid="uid://c4mv5u70ge7ja" path="res://ui/bonus_picker/tutorial_spirit_help.webp" id="28_cx3aq"]
 [ext_resource type="AudioStream" uid="uid://bw5hdrx4e1iyx" path="res://game_loop/game_over.ogg" id="28_x4fam"]
+[ext_resource type="PackedScene" uid="uid://diq640dlhwq4j" path="res://ui/bonus_picker/bonus_pick_button.tscn" id="29_sfcge"]
 
 [sub_resource type="Animation" id="Animation_u84je"]
 length = 0.001
@@ -353,6 +356,33 @@ one_shot = true
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="UI/Tutorial"]
 stream = ExtResource("22_4bn4i")
+
+[node name="BonusPicker" type="Node2D" parent="UI/Tutorial"]
+script = ExtResource("27_7sqbh")
+prog_data = ExtResource("14_cg3ba")
+
+[node name="BG" type="Sprite2D" parent="UI/Tutorial/BonusPicker"]
+texture = ExtResource("28_cx3aq")
+
+[node name="Label" type="Label" parent="UI/Tutorial/BonusPicker"]
+offset_left = -296.0
+offset_top = -196.0
+offset_right = 314.0
+offset_bottom = -25.0
+theme = ExtResource("17_citkh")
+theme_override_colors/font_color = Color(0.197258, 0.252424, 0, 1)
+theme_override_fonts/font = ExtResource("15_nmds6")
+theme_override_font_sizes/font_size = 56
+text = "Pick one of these options to aid you ..."
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 3
+
+[node name="BonusPickButtonLeft" parent="UI/Tutorial/BonusPicker" instance=ExtResource("29_sfcge")]
+position = Vector2(-224, 117)
+
+[node name="BonusPickButtonRight" parent="UI/Tutorial/BonusPicker" instance=ExtResource("29_sfcge")]
+position = Vector2(210, 117)
 
 [node name="GameOver" type="Control" parent="UI"]
 process_mode = 3

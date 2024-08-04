@@ -39,30 +39,23 @@ You only see one side of the game at a time. Ghosts spawn on either side.
 * If it hits you before that moment, you lose a life + the ghost might have a special curse for you.
 
 
-## CRUCIAL TODO
-
-Juice/Polishing:
-* We have more ghosts than glasses, so maybe stop alternating between them? Start with glasses and then we'll see?
-* Sometimes it's a bit meh when you can see ghosts but can't kill them yet
-  * **@IDEA: The longer you stay in one view, the further your kill radius/sight radius grows?** Yes, seems fair.
-  * **@IDEA: Then also simply test growing STRONGER the longer you stay in that view.**
-* Feedback when trying to use the wrong glasses on a ghost? (Or a clear tutorial thing/hint that actually explains this?)
-  * **@IDEA: Highlight the glasses sprite when a ghost is being targeted** => this should reinforce that rule without needing to explain it.
-
-Player Progression:
-* Test automatically scaling parameters based on Progression
-
-
 ## STRETCH GOALS
-
-
-* For difficulty control / better progression
-  * Now the ghosts escalate, but you don't necessarily do. So maybe there are powerups or something that will make _all_ goggles faster at damage, or _all_ ghosts slower, or something. (Maybe this is a choice: whenever a new ghost is introduced, you can ALSO choose "Ghosts are 10% slower" OR "Every goggle does +5 damage")
-  * When determining ghost and glasses order, don't be completely random. Leave those with a higher value ( = harder) for _later_? (Should work, but I haven't actually assigned values to glasses and ghosts currently.)
 
 @IDEA: Get powerups/new glasses/something more _proactively_?
 * Probably just by _seeing them_ for long enough, to neatly re-use the same mechanics everywhere. => **This is actually really promising, but I don't have time to put it into the game now.**
 * (Or have one-time goggles that, when selected, will instantly trigger whatever they do and then disappear from your inventory.)
+
+
+POSSIBLE TWEAKS:
+* The starting glasses are pretty powerful now. Slightly reduce their range of kill (and maybe sight)?
+* When determining ghost and glasses order, don't be completely random. Leave those with a higher value ( = harder) for _later_? (Should work, but I haven't actually assigned values to glasses and ghosts currently.)
+
+MORE SPIRIT HELP OPTIONS:
+* Get an extra life
+* Get more points?
+* Range grows faster (when you stay in view)
+* Bigger likelihood of ghosts being weak to more glasses
+* Something to do with glasses? (Get an extra glasses now? Get an extra ghost now?)
 
 
 Juice:

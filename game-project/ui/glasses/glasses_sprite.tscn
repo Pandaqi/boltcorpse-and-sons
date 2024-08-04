@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=3 uid="uid://c8qgvdiwwqt1c"]
+[gd_scene load_steps=11 format=3 uid="uid://c8qgvdiwwqt1c"]
 
 [ext_resource type="Script" path="res://ui/glasses/glasses_sprite.gd" id="1_dygqc"]
 [ext_resource type="Resource" uid="uid://d21b842whii5" path="res://player/glasses/glasses_data.tres" id="2_5abi5"]
@@ -9,6 +9,44 @@
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_mk1p1"]
 size = Vector2(82, 85)
+
+[sub_resource type="Animation" id="Animation_7rkse"]
+resource_name = "wobble"
+length = 0.4
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.3),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [0.0, -0.174533, 0.174533]
+}
+
+[sub_resource type="Animation" id="Animation_jwjp0"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_wwso3"]
+_data = {
+"RESET": SubResource("Animation_jwjp0"),
+"wobble": SubResource("Animation_7rkse")
+}
 
 [node name="GlassesSprite" type="Node2D"]
 script = ExtResource("1_dygqc")
@@ -53,5 +91,10 @@ vertical_alignment = 1
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
 position = Vector2(0, 0.5)
 shape = SubResource("RectangleShape2D_mk1p1")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_wwso3")
+}
 
 [connection signal="input_event" from="Area2D" to="." method="_on_area_2d_input_event"]

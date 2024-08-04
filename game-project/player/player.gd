@@ -14,4 +14,4 @@ func activate() -> void:
 	looker.activate()
 	lives.activate()
 	glasses_picker.activate(looker)
-	ghost_killer.activate(stats_tracker)
+	ghost_killer.activate(stats_tracker, looker)

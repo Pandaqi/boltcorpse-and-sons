@@ -1,4 +1,4 @@
-[gd_scene load_steps=26 format=3 uid="uid://dsuvq68miv6x8"]
+[gd_scene load_steps=27 format=3 uid="uid://dsuvq68miv6x8"]
 
 [ext_resource type="Script" path="res://ghosts/ghost.gd" id="1_dygqk"]
 [ext_resource type="Resource" uid="uid://u6olkls3fh7k" path="res://game_loop/globals/config.tres" id="2_3m5yl"]
@@ -15,6 +15,7 @@
 [ext_resource type="Resource" uid="uid://crb1nt4ffy00e" path="res://player/player_data.tres" id="9_r4qif"]
 [ext_resource type="Resource" uid="uid://7ndijft3aqws" path="res://ghosts/ghost_data.tres" id="10_54yxy"]
 [ext_resource type="Animation" uid="uid://c41o0ky1kx0ds" path="res://player/light_sprites/anim_flicker.res" id="11_pwsju"]
+[ext_resource type="Resource" uid="uid://mfgajlgamn7b" path="res://game_loop/main/progression/progression_data.tres" id="11_vj02m"]
 [ext_resource type="AudioStream" uid="uid://c5lyxmhiuxpt4" path="res://ghosts/ghost_appear.ogg" id="13_at803"]
 [ext_resource type="Script" path="res://ghosts/modules/ghost_effects.gd" id="13_ktb6w"]
 [ext_resource type="AudioStream" uid="uid://c3kyxpurnposq" path="res://ghosts/ghost_whisper.ogg" id="15_rp6lp"]
@@ -169,6 +170,7 @@ colors = PackedColorArray(1, 1, 1, 0, 1, 1, 1, 1, 1, 1, 1, 0)
 [node name="Ghost" type="Node2D" groups=["Ghosts"]]
 script = ExtResource("1_dygqk")
 config = ExtResource("2_3m5yl")
+prog_data = ExtResource("11_vj02m")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 texture = ExtResource("2_u4en6")
@@ -212,6 +214,7 @@ tint_progress = Color(0.858824, 0.270588, 0.2, 1)
 script = ExtResource("4_nfhkg")
 player_data = ExtResource("9_r4qif")
 ghost_data = ExtResource("10_54yxy")
+prog_data = ExtResource("11_vj02m")
 
 [node name="Weaknesses" type="Node2D" parent="."]
 position = Vector2(0, 202)

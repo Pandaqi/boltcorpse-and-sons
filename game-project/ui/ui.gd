@@ -10,7 +10,7 @@ func activate(p:Player):
 	lives.activate(p)
 	glasses.activate()
 	game_over.activate()
-	tutorial.activate()
+	tutorial.activate(game_over)
 	on_resize()
 
 func on_resize() -> void:

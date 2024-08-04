@@ -1,6 +1,8 @@
 class_name ModuleLooker extends Node2D
 
 var dir := 0
+var sight_radius_extra_scale := 0.0
+
 @onready var entity : Player = get_parent()
 @onready var flash_light = $Flashlight
 @onready var light : PointLight2D = $Flashlight/PointLight2D
@@ -10,6 +12,7 @@ var dir := 0
 @export var player_data : PlayerData
 @export var ghost_data : GhostData
 @export var glasses_data : GlassesData
+@export var prog_data : ProgressionData
 @export var config : Config
 
 signal dir_changed(new_dir:int)
@@ -36,6 +39,19 @@ func animate() -> void:
 	tw.parallel().tween_property(light, "color:a", 1.0, rand_dur)
 	tw.tween_callback(animate)
 
+func _process(dt:float) -> void:
+	grow_sight_radius(dt)
+	display_sight_radius()
+
+func grow_sight_radius(dt:float) -> void:
+	if not config.staying_in_view_changes_sight_radius: return
+	sight_radius_extra_scale += config.sight_radius_change_in_view * dt
+
+func display_sight_radius() -> void:
+	var range_sight := glasses_data.get_current_glasses().range_see * config.glasses_def_range_see + sight_radius_extra_scale
+	var range_as_scale := range_sight/128.0 * 2 # divide by base sprite size, multiply by 2 because scale is full width and radius only half the circle of course
+	sight_radius.set_scale(Vector2.ONE * range_as_scale)
+
 func _input(ev:InputEvent) -> void:
 	var side := 0
 	
@@ -57,7 +73,10 @@ func look_to_side(new_dir:int) -> void:
 	dir = new_dir
 	flash_light.scale.x = new_dir
 	player_data.side_looking = dir
+	
+	reset_extra_radius() # @NOTE: comes before checking ghosts, because range matters for it!
 	check_ghost_appearance()
+	
 	dir_changed.emit(dir)
 	
 	audio_player.pitch_scale = randf_range(0.9, 1.1)
@@ -68,16 +87,20 @@ func check_ghost_appearance() -> void:
 	for ghost in all_ghosts:
 		ghost.change_appearance(player_data.should_ghost_be_visible(ghost))
 
+func calculate_sight_range() -> float:
+	return (glasses_data.get_current_glasses().range_see * config.glasses_def_range_see * prog_data.rules_data.sight_radius_change) + sight_radius_extra_scale
+
 func ghost_is_in_range(ghost:Ghost) -> bool:
-	return ghost.global_position.distance_to(entity.global_position) <= (glasses_data.get_current_glasses().range_see * config.glasses_def_range_see)
+	return ghost.global_position.distance_to(entity.global_position) <= calculate_sight_range()
 
 func set_light_properties(col:Color, tex:Texture2D) -> void:
 	light.color = col
 	light.texture = tex
 
-func on_glasses_changed(new_glasses:GlassesTypeData) -> void:
-	var range_sight := new_glasses.range_see * config.glasses_def_range_see
-	var range_as_scale := range_sight/128.0 * 2 # divide by base sprite size, multiply by 2 because scale is full width and radius only half the circle of course
-	sight_radius.set_scale(Vector2.ONE * range_as_scale)
+func on_glasses_changed(_new_glasses:GlassesTypeData) -> void:
+	reset_extra_radius()
 	check_ghost_appearance()
-	
+
+func reset_extra_radius():
+	sight_radius_extra_scale = 0.0
+	display_sight_radius()
